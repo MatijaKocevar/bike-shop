@@ -17,6 +17,9 @@
         "upload": "Upload",
         "none": "None",
         "set": "Set",
+        "search": "Search…",
+        "noResults": "No matches.",
+        "selectCustomer": "Select customer…",
         "total": "Total"
     },
     "app": {
@@ -61,14 +64,13 @@
         "newReceipt": "New receipt"
     },
     "calendar": {
-        "title": "Calendar",
         "today": "Today",
-        "prev": "Previous month",
-        "next": "Next month",
+        "thisWeek": "This week",
+        "nextWeek": "Next week",
+        "prevWeek": "Previous week",
         "new": "New reservation",
         "newTitle": "New reservation",
         "editTitle": "Edit reservation",
-        "dayTitle": "Reservations",
         "date": "Date",
         "time": "Time",
         "duration": "Duration (min)",
@@ -76,11 +78,10 @@
         "customer": "Customer",
         "bike": "Bike",
         "notePlaceholder": "optional note",
+        "noCustomerHint": "No customer — this only reserves time, no work ticket is created.",
         "walkIn": "No customer",
         "create": "Reserve",
         "delete": "Delete reservation",
-        "empty": "No reservations this day.",
-        "more": "+{count}",
         "conflict": "Overlaps another reservation at {time}."
     },
     "tickets": {
@@ -89,6 +90,7 @@
         "newTitle": "New work ticket",
         "number": "No.",
         "customer": "Customer",
+        "noCustomerHint": "Select a customer to write up a work ticket.",
         "bike": "Bike",
         "status": "Status",
         "date": "Date",
