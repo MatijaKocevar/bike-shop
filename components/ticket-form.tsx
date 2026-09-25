@@ -216,6 +216,27 @@ export function TicketForm({
         updateActiveTab({ lines: active.lines.filter((line) => line.key !== key) });
     }
 
+    function renderTab(tab: TicketBikeTab) {
+        const label = tab.bikeId ? tab.bikeName : tab.newBike.name.trim() || t("newBike");
+
+        return (
+            <button
+                key={tab.key}
+                type="button"
+                onClick={() => setActiveKey(tab.key)}
+                className={cn(
+                    "-mb-px shrink-0 border-b-2 border-transparent px-3 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground hover:text-foreground",
+                    active.key === tab.key && "border-primary text-foreground",
+                )}
+            >
+                {label}
+                {tab.lines.length > 0 ? ` (${tab.lines.length})` : ""}
+            </button>
+        );
+    }
+
+    const bikeTabs = tabs.filter((tab) => tab.bikeId !== null);
+    const newBikeTabs = tabs.filter((tab) => tab.bikeId === null);
     const entries = tabs
         .filter((tab) => tab.bikeId || tab.newBike.name.trim())
         .map((tab) => ({
@@ -407,40 +428,27 @@ export function TicketForm({
             {actions && <div className="shrink-0">{actions}</div>}
 
             <div className="flex min-h-0 flex-1 flex-col">
-                <div className="flex shrink-0 items-center gap-1 overflow-x-auto overflow-y-hidden border-b">
-                    {tabs.map((tab) => {
-                        const label = tab.bikeId
-                            ? tab.bikeName
-                            : tab.newBike.name.trim() || t("newBike");
+                <div className="flex shrink-0 items-center border-b">
+                    <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto overflow-y-hidden">
+                        {bikeTabs.map(renderTab)}
+                    </div>
 
-                        return (
-                            <button
-                                key={tab.key}
-                                type="button"
-                                onClick={() => setActiveKey(tab.key)}
-                                className={cn(
-                                    "-mb-px shrink-0 border-b-2 border-transparent px-3 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground hover:text-foreground",
-                                    active.key === tab.key && "border-primary text-foreground",
-                                )}
-                            >
-                                {label}
-                                {tab.lines.length > 0 ? ` (${tab.lines.length})` : ""}
-                            </button>
-                        );
-                    })}
+                    {bikeTabs.length > 0 && <div className="mx-2 h-4 w-px shrink-0 bg-border" />}
 
-                    <div className="mx-1 h-4 shrink-0 self-center bg-border" />
+                    <div className="flex shrink-0 items-center gap-1">
+                        {newBikeTabs.map(renderTab)}
 
-                    <button
-                        type="button"
-                        onClick={() => setActiveKey(OVERVIEW_KEY)}
-                        className={cn(
-                            "-mb-px shrink-0 border-b-2 border-transparent px-3 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground hover:text-foreground",
-                            overviewActive && "border-primary text-foreground",
-                        )}
-                    >
-                        {t("overview")}
-                    </button>
+                        <button
+                            type="button"
+                            onClick={() => setActiveKey(OVERVIEW_KEY)}
+                            className={cn(
+                                "-mb-px shrink-0 border-b-2 border-transparent px-3 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground hover:text-foreground",
+                                overviewActive && "border-primary text-foreground",
+                            )}
+                        >
+                            {t("overview")}
+                        </button>
+                    </div>
                 </div>
 
                 <div className="flex min-h-0 flex-1 flex-col gap-4 pt-4">
