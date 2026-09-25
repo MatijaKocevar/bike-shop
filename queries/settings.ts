@@ -16,7 +16,7 @@ export async function getShopSettings(): Promise<ShopSettings> {
     const values = new Map(rows.map((row) => [row.key, row.value]));
 
     return {
-        shopName: values.get("shopName") ?? "Bike Shop",
+        shopName: values.get("shopName") ?? "Bicikl Kočevar",
         address: values.get("address") ?? "",
         phone: values.get("phone") ?? "",
         email: values.get("email") ?? "",
