@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import { ThemeColorSync } from "@/components/theme-color-sync";
+import { ServiceWorkerRegister } from "@/components/service-worker-register";
 import { ThemeProvider } from "@/components/theme-provider";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
@@ -30,6 +31,12 @@ export async function generateMetadata(): Promise<Metadata> {
             template: "%s · Bike Shop",
         },
         description: t("description"),
+        manifest: "/manifest-light.webmanifest",
+        appleWebApp: {
+            capable: true,
+            title: "Bike Shop",
+            statusBarStyle: "default",
+        },
     };
 }
 
@@ -50,6 +57,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 <NextIntlClientProvider messages={messages}>
                     <ThemeProvider>
                         <ThemeColorSync />
+                        <ServiceWorkerRegister />
                         {children}
                     </ThemeProvider>
                 </NextIntlClientProvider>
