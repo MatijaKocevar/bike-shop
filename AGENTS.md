@@ -52,6 +52,15 @@ Setup: copy `.env.example` → `.env`. Auth uses email/password for seeded users
 
 **The user runs the dev server. Never start one.** Do not run `pnpm dev`, `next dev`, `next start`, or any background process (`nohup`, `setsid`, `&`) — not even briefly for a smoke test. Never stop or restart the user's server either. If the app must be running for verification, ask the user to start it and test against `https://localhost:10001`.
 
+## Deployment (production)
+
+Full runbook: [`docs/deploy.md`](docs/deploy.md).
+
+- Production runs on `server-asus` (`server@192.168.0.10`, LAN/WireGuard only). **Never edit files on the server directly** — changes go through git.
+- App: https://bicikl-kocevar.com behind a Cloudflare Tunnel; pictures at `files.bicikl-kocevar.com` (MinIO, presigned uploads).
+- Deploy = push `main`, then run `scripts/deploy.sh` on the server or `scripts/deploy-remote.sh` from a dev machine. There is no CI/CD — the server is not publicly reachable, so deploys are pull-based.
+- Server checkout: `/home/server/Projects/bike-shop`; secrets live in its `.env` (gitignored) and `~/.secrets/`. Backup/restore steps and the MinIO-images gotcha are in the runbook.
+
 ## Structure & conventions (the rules this repo follows)
 
 ```
