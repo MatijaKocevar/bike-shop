@@ -48,7 +48,7 @@ export default async function TicketsPage({ searchParams }: TicketsPageProps) {
                 open={Boolean(isNew)}
                 onCloseHref="/tickets"
                 title={t("newTitle")}
-                className="overflow-y-hidden sm:h-[90dvh] sm:max-w-5xl"
+                className="sm:h-[90dvh] sm:max-w-5xl sm:overflow-y-hidden"
             >
                 {isNew ? (
                     <TicketForm
@@ -70,7 +70,7 @@ export default async function TicketsPage({ searchParams }: TicketsPageProps) {
                         ? `#${editing.number}${editing.customerName ? ` · ${editing.customerName}` : ""}`
                         : undefined
                 }
-                className="overflow-y-hidden sm:h-[90dvh] sm:max-w-5xl"
+                className="sm:h-[90dvh] sm:max-w-5xl sm:overflow-y-hidden"
             >
                 {editing ? (
                     <TicketForm

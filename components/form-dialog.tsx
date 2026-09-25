@@ -33,12 +33,12 @@ export function FormDialog({
         <Dialog
             open={open}
             onOpenChange={(next) => {
-                if (!next) router.replace(onCloseHref);
+                if (!next) router.replace(onCloseHref, { scroll: false });
             }}
         >
             <DialogContent
                 className={cn(
-                    "grid-rows-[auto_minmax(0,1fr)] max-h-[95dvh] overflow-y-auto p-6 lg:p-8",
+                    "max-h-[95dvh] grid-rows-[auto] overflow-y-auto p-4 sm:grid-rows-[auto_minmax(0,1fr)] sm:p-6 lg:p-8",
                     className,
                 )}
             >
