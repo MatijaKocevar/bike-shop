@@ -8,8 +8,12 @@ const proxy = auth((req) => {
     const { nextUrl } = req;
 
     if (!req.auth) {
-        const origin = process.env.AUTH_URL ?? nextUrl.origin;
-        const url = new URL("/signin", origin);
+        const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host") ?? nextUrl.host;
+        const authProtocol = process.env.AUTH_URL
+            ? new URL(process.env.AUTH_URL).protocol
+            : nextUrl.protocol;
+        const protocol = (req.headers.get("x-forwarded-proto") ?? authProtocol).replace(/:$/, "");
+        const url = new URL(`${protocol}://${host}/signin`);
         url.searchParams.set("callbackUrl", nextUrl.pathname);
 
         return NextResponse.redirect(url);

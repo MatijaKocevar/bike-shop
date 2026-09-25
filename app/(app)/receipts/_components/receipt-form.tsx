@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Plus, Trash2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { SearchSelect } from "@/components/search-select";
 import { discountAmount, formatCurrency, receiptTotals } from "@/lib/money";
 import type { BikeOption } from "@/queries/bikes.types";
 import type { CustomerOption } from "@/queries/customers.types";
@@ -106,20 +107,21 @@ export function ReceiptForm({ customers, bikes, products }: ReceiptFormProps) {
             <div className="grid grid-cols-2 gap-4">
                 <label className="flex flex-col gap-1.5 text-sm">
                     <span className="font-medium">{t("customer")}</span>
-                    <select
-                        className={`${inputClass} w-full`}
+                    <SearchSelect
                         name="customerId"
                         value={customerId}
-                        onChange={(event) => selectCustomer(event.target.value)}
-                    >
-                        <option value="">{t("walkIn")}</option>
-                        {customers.map((customer) => (
-                            <option key={customer.id} value={customer.id}>
-                                {customer.name}
-                            </option>
-                        ))}
-                        <option value={NEW_CUSTOMER}>{tCustomer("new")}</option>
-                    </select>
+                        onChange={selectCustomer}
+                        placeholder={t("walkIn")}
+                        options={[
+                            { value: "", label: t("walkIn") },
+                            ...customers.map((customer) => ({
+                                value: customer.id,
+                                label: customer.name,
+                                hint: customer.phone ?? undefined,
+                            })),
+                            { value: NEW_CUSTOMER, label: tCustomer("new") },
+                        ]}
+                    />
                 </label>
 
                 {!isNewCustomer && customerBikes.length > 0 && (
