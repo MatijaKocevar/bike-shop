@@ -64,6 +64,17 @@ pnpm db:migrate       # prisma migrate dev
 pnpm db:seed          # prisma db seed
 ```
 
+## Deployment
+
+Production runs on a private server behind a Cloudflare Tunnel at https://bicikl-kocevar.com. Deploy from `main` with the scripts:
+
+```bash
+./scripts/deploy-remote.sh   # from a dev machine with SSH access
+./scripts/deploy.sh          # on the server itself
+```
+
+Full runbook, secrets and restore steps: [`docs/deploy.md`](docs/deploy.md).
+
 ## Project structure
 
 ```
