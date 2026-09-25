@@ -17,6 +17,9 @@
         "upload": "Naloži",
         "none": "Brez",
         "set": "Nastavi",
+        "search": "Iskanje…",
+        "noResults": "Ni zadetkov.",
+        "selectCustomer": "Izberi stranko …",
         "total": "Skupaj"
     },
     "app": {
@@ -61,14 +64,13 @@
         "newReceipt": "Nov račun"
     },
     "calendar": {
-        "title": "Koledar",
         "today": "Danes",
-        "prev": "Prejšnji mesec",
-        "next": "Naslednji mesec",
+        "thisWeek": "Ta teden",
+        "nextWeek": "Naslednji teden",
+        "prevWeek": "Prejšnji teden",
         "new": "Nova rezervacija",
         "newTitle": "Nova rezervacija",
         "editTitle": "Uredi rezervacijo",
-        "dayTitle": "Rezervacije",
         "date": "Datum",
         "time": "Ura",
         "duration": "Trajanje (min)",
@@ -76,11 +78,10 @@
         "customer": "Stranka",
         "bike": "Kolo",
         "notePlaceholder": "neobvezna opomba",
+        "noCustomerHint": "Brez stranke — rezervira se samo čas, delovni nalog se ne ustvari.",
         "walkIn": "Brez stranke",
         "create": "Rezerviraj",
         "delete": "Izbriši rezervacijo",
-        "empty": "Ta dan ni rezervacij.",
-        "more": "+{count}",
         "conflict": "Prekriva se z rezervacijo ob {time}."
     },
     "tickets": {
@@ -89,6 +90,7 @@
         "newTitle": "Nov delovni nalog",
         "number": "Št.",
         "customer": "Stranka",
+        "noCustomerHint": "Izberite stranko za izpolnjevanje delovnega naloga.",
         "bike": "Kolo",
         "status": "Status",
         "date": "Datum",

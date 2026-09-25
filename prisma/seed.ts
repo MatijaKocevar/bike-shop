@@ -537,70 +537,49 @@ async function main() {
         return dateKey(date);
     };
 
-    const reservationRows = [
-        {
-            id: "seed-reservation-1",
-            date: dayIn(0),
-            startMinutes: 17 * 60,
-            durationMinutes: 60,
-            customerId: "seed-customer-1" as string | null,
-            bikeId: "seed-bike-1" as string | null,
-            ticketId: "seed-ticket-1" as string | null,
-            note: null as string | null,
-        },
-        {
-            id: "seed-reservation-2",
-            date: dayIn(1),
-            startMinutes: 9 * 60,
-            durationMinutes: 60,
-            customerId: "seed-customer-2" as string | null,
-            bikeId: "seed-bike-2" as string | null,
-            ticketId: "seed-ticket-2" as string | null,
-            note: null as string | null,
-        },
-        {
-            id: "seed-reservation-3",
-            date: dayIn(2),
-            startMinutes: 17 * 60,
-            durationMinutes: 60,
-            customerId: "seed-customer-4" as string | null,
-            bikeId: "seed-bike-4" as string | null,
-            ticketId: "seed-ticket-4" as string | null,
-            note: null as string | null,
-        },
-        {
-            id: "seed-reservation-4",
-            date: dayIn(1),
-            startMinutes: 12 * 60,
-            durationMinutes: 45,
-            customerId: null as string | null,
-            bikeId: null as string | null,
-            ticketId: null as string | null,
-            note: "Prevzem rezervnih delov.",
-        },
+    await db.reservation.deleteMany({
+        where: { id: { startsWith: "seed-reservation-" } },
+    });
+
+    const customerPool = [
+        "seed-customer-1",
+        "seed-customer-2",
+        "seed-customer-3",
+        "seed-customer-4",
     ];
+    const bikePool = ["seed-bike-1", "seed-bike-2", "seed-bike-3", "seed-bike-4"];
+    const ticketPool = ["seed-ticket-1", "seed-ticket-2", "seed-ticket-3", "seed-ticket-4"];
+    const personalNotes = ["Malica.", "Prevzem rezervnih delov.", "Dostava.", "Servis orodja."];
+    const durations = [30, 45, 60, 90];
 
-    for (const reservation of reservationRows) {
-        const customer = reservation.customerId ? customerById.get(reservation.customerId) : null;
-        const bike = reservation.bikeId ? bikeById.get(reservation.bikeId) : null;
+    for (let day = 0; day <= 13; day++) {
+        const count = 10 + (day % 3);
 
-        await db.reservation.upsert({
-            where: { id: reservation.id },
-            update: {},
-            create: {
-                id: reservation.id,
-                date: reservation.date,
-                startMinutes: reservation.startMinutes,
-                durationMinutes: reservation.durationMinutes,
-                note: reservation.note,
-                customerId: reservation.customerId,
-                customerName: customer?.name ?? null,
-                bikeId: reservation.bikeId,
-                bikeName: bike?.name ?? null,
-                ticketId: reservation.ticketId,
-                createdById: admin.id,
-            },
-        });
+        for (let index = 0; index < count; index++) {
+            const id = `seed-reservation-${day}-${index}`;
+            const person = (day + index) % customerPool.length;
+            const personal = index % 5 === 4;
+            const customerId = personal ? null : customerPool[person];
+            const bikeId = personal ? null : bikePool[person];
+
+            await db.reservation.upsert({
+                where: { id },
+                update: {},
+                create: {
+                    id,
+                    date: dayIn(day),
+                    startMinutes: 8 * 60 + index * 75,
+                    durationMinutes: durations[(day + index) % durations.length],
+                    note: personal ? personalNotes[(day + index) % personalNotes.length] : null,
+                    customerId,
+                    customerName: customerId ? (customerById.get(customerId)?.name ?? null) : null,
+                    bikeId,
+                    bikeName: bikeId ? (bikeById.get(bikeId)?.name ?? null) : null,
+                    ticketId: !personal && index === 0 ? ticketPool[person] : null,
+                    createdById: admin.id,
+                },
+            });
+        }
     }
 
     console.log("Seed complete.");

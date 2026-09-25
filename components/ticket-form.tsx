@@ -6,6 +6,7 @@ import { Plus, Trash2, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { TicketOverview } from "@/components/ticket-overview";
 import type { TicketBikeTab, TicketLineDraft } from "@/components/ticket-form.types";
+import { SearchSelect } from "@/components/search-select";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { formatTime, parseTime } from "@/lib/dates";
 import { formatCurrency } from "@/lib/money";
@@ -54,6 +55,10 @@ function customerTabs(customerId: string, bikes: BikeOption[]): TicketBikeTab[] 
     const own = bikes.filter((bike) => bike.customerId === customerId);
 
     return [...own.map((bike) => createBikeTab(bike)), createBikeTab()];
+}
+
+function withNewBikeTab(tab: TicketBikeTab): TicketBikeTab[] {
+    return tab.bikeId ? [tab, createBikeTab()] : [tab];
 }
 
 function createLine(products: ProductOption[]): TicketLineDraft {
@@ -124,14 +129,14 @@ export function TicketForm({
     const isReservation = Boolean(reservation) || defaultDate !== undefined;
     const isEdit = Boolean(ticket) || Boolean(reservation);
     const [customerId, setCustomerId] = useState(
-        ticket?.customerId ?? reservation?.customerId ?? customers[0]?.id ?? "",
+        ticket?.customerId ?? reservation?.customerId ?? "",
     );
     const [creatingCustomer, setCreatingCustomer] = useState(!isEdit && customers.length === 0);
     const [tabs, setTabs] = useState<TicketBikeTab[]>(() => {
-        if (ticket) return [ticketTab(ticket), createBikeTab()];
-        if (reservation) return [reservationTab(reservation), createBikeTab()];
+        if (ticket) return withNewBikeTab(ticketTab(ticket));
+        if (reservation) return withNewBikeTab(reservationTab(reservation));
 
-        return customers.length > 0 ? customerTabs(customers[0].id, bikes) : [createBikeTab()];
+        return [createBikeTab()];
     });
     const [activeKey, setActiveKey] = useState("");
     const [date, setDate] = useState(reservation?.date ?? defaultDate ?? "");
@@ -152,14 +157,18 @@ export function TicketForm({
 
     const active = tabs.find((tab) => tab.key === activeKey) ?? tabs[0];
     const overviewActive = activeKey === OVERVIEW_KEY;
-    const showCustomerForm = !isEdit && (creatingCustomer || customers.length === 0);
-    const customerName = ticket?.customerName ?? reservation?.customerName ?? "—";
-    const customerPhone = ticket?.customerPhone ?? reservation?.customerPhone ?? null;
+    const customerLocked = Boolean(ticket);
+    const showCustomerForm = !customerLocked && (creatingCustomer || customers.length === 0);
+    const noCustomer = !customerLocked && !showCustomerForm && customerId === "";
+    const customerName = ticket?.customerName ?? "—";
 
     function selectCustomer(id: string) {
+        setCustomerId(id);
+
+        if (isEdit) return;
+
         const next = customerTabs(id, bikes);
 
-        setCustomerId(id);
         setTabs(next);
         setActiveKey(next[0].key);
     }
@@ -167,7 +176,7 @@ export function TicketForm({
     function toggleCustomerForm() {
         if (showCustomerForm) {
             setCreatingCustomer(false);
-            selectCustomer(customerId || customers[0].id);
+            selectCustomer(customerId);
 
             return;
         }
@@ -226,7 +235,7 @@ export function TicketForm({
                 onClick={() => setActiveKey(tab.key)}
                 className={cn(
                     "-mb-px shrink-0 border-b-2 border-transparent px-3 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground hover:text-foreground",
-                    active.key === tab.key && "border-primary text-foreground",
+                    active.key === tab.key && !noCustomer && "border-primary text-foreground",
                 )}
             >
                 {label}
@@ -280,12 +289,14 @@ export function TicketForm({
             : undefined;
     const canSubmit = isReservation
         ? date !== "" && startMinutes !== null
-        : entries.length > 0 && !missingBikeName;
+        : (customerLocked || showCustomerForm || customerId !== "") &&
+          entries.length > 0 &&
+          !missingBikeName;
 
     return (
         <form
             action={isEdit ? editAction : createAction}
-            className="flex h-full min-h-0 flex-col gap-4"
+            className="flex min-h-0 flex-col gap-4 sm:h-full"
         >
             {(ticket || reservation) && (
                 <input type="hidden" name="id" value={(ticket ?? reservation)?.id ?? ""} />
@@ -294,7 +305,7 @@ export function TicketForm({
 
             {isReservation && (
                 <div className="flex shrink-0 flex-col gap-3">
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                         <label className="flex flex-col gap-1.5 text-sm">
                             <span className="font-medium">{tCalendar("date")}</span>
                             <input
@@ -361,16 +372,13 @@ export function TicketForm({
             <div className="flex shrink-0 items-end gap-2">
                 <label className="flex min-w-0 flex-1 flex-col gap-1.5 text-sm">
                     <span className="font-medium">{t("customer")}</span>
-                    {isEdit ? (
+                    {customerLocked ? (
                         <select
                             className={`${inputClass} w-full disabled:opacity-100 disabled:text-foreground`}
                             defaultValue={customerId}
                             disabled
                         >
-                            <option value={customerId}>
-                                {customerName}
-                                {customerPhone ? ` · ${customerPhone}` : ""}
-                            </option>
+                            <option value={customerId}>{customerName}</option>
                         </select>
                     ) : showCustomerForm ? (
                         <input
@@ -381,23 +389,26 @@ export function TicketForm({
                             placeholder={t("newCustomerNamePlaceholder")}
                         />
                     ) : (
-                        <select
-                            className={`${inputClass} w-full`}
+                        <SearchSelect
                             name="customerId"
                             value={customerId}
-                            onChange={(event) => selectCustomer(event.target.value)}
-                        >
-                            {customers.map((customer) => (
-                                <option key={customer.id} value={customer.id}>
-                                    {customer.name}
-                                    {customer.phone ? ` · ${customer.phone}` : ""}
-                                </option>
-                            ))}
-                        </select>
+                            onChange={selectCustomer}
+                            placeholder={tCommon("selectCustomer")}
+                            options={[
+                                ...(isReservation
+                                    ? [{ value: "", label: tCalendar("walkIn") }]
+                                    : []),
+                                ...customers.map((customer) => ({
+                                    value: customer.id,
+                                    label: customer.name,
+                                    hint: customer.phone ?? undefined,
+                                })),
+                            ]}
+                        />
                     )}
                 </label>
 
-                {!isEdit && customers.length > 0 && (
+                {!customerLocked && customers.length > 0 && (
                     <Button
                         type="button"
                         variant={showCustomerForm ? "ghost" : "outline"}
@@ -427,7 +438,16 @@ export function TicketForm({
 
             {actions && <div className="shrink-0">{actions}</div>}
 
-            <div className="flex min-h-0 flex-1 flex-col">
+            {noCustomer && (
+                <p className="shrink-0 text-sm text-muted-foreground">
+                    {isReservation ? tCalendar("noCustomerHint") : t("noCustomerHint")}
+                </p>
+            )}
+
+            <fieldset
+                disabled={noCustomer}
+                className="flex min-h-0 flex-col disabled:opacity-50 sm:flex-1"
+            >
                 <div className="flex shrink-0 items-center border-b">
                     <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto overflow-y-hidden">
                         {bikeTabs.map(renderTab)}
@@ -443,7 +463,7 @@ export function TicketForm({
                             onClick={() => setActiveKey(OVERVIEW_KEY)}
                             className={cn(
                                 "-mb-px shrink-0 border-b-2 border-transparent px-3 py-2 text-sm font-medium whitespace-nowrap text-muted-foreground hover:text-foreground",
-                                overviewActive && "border-primary text-foreground",
+                                overviewActive && !noCustomer && "border-primary text-foreground",
                             )}
                         >
                             {t("overview")}
@@ -451,7 +471,7 @@ export function TicketForm({
                     </div>
                 </div>
 
-                <div className="flex min-h-0 flex-1 flex-col gap-4 pt-4">
+                <div className="flex min-h-0 flex-col gap-4 pt-4 sm:flex-1">
                     {overviewActive ? (
                         <TicketOverview tabs={tabs} onSelectTab={setActiveKey} />
                     ) : (
@@ -529,10 +549,10 @@ export function TicketForm({
                                 </div>
                             )}
 
-                            <label className="flex min-h-24 flex-1 flex-col gap-1.5 text-sm">
+                            <label className="flex min-h-24 flex-col gap-1.5 text-sm sm:flex-1">
                                 <span className="font-medium">{t("intakeNote")}</span>
                                 <textarea
-                                    className={`${inputClass} min-h-0 w-full flex-1 resize-none`}
+                                    className={`${inputClass} min-h-0 w-full resize-none sm:flex-1`}
                                     value={active.intakeNote}
                                     placeholder={t("intakeNotePlaceholder")}
                                     onChange={(event) =>
@@ -544,7 +564,7 @@ export function TicketForm({
                             <div
                                 className={cn(
                                     "flex flex-col gap-2",
-                                    active.lines.length > 0 ? "min-h-0 flex-1" : "shrink-0",
+                                    active.lines.length > 0 ? "sm:min-h-0 sm:flex-1" : "shrink-0",
                                 )}
                             >
                                 <span className="shrink-0 text-sm font-medium">
@@ -556,7 +576,7 @@ export function TicketForm({
                                 )}
 
                                 {active.lines.length > 0 && (
-                                    <div className="flex shrink-0 items-center gap-2 px-1 text-xs text-muted-foreground">
+                                    <div className="hidden shrink-0 items-center gap-2 px-1 text-xs text-muted-foreground sm:flex">
                                         <span className="min-w-0 flex-1">{t("service")}</span>
                                         <span className="w-16 shrink-0 text-center">
                                             {t("quantity")}
@@ -571,14 +591,14 @@ export function TicketForm({
                                     </div>
                                 )}
 
-                                <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto pr-1">
+                                <div className="flex flex-col gap-2 sm:min-h-0 sm:flex-1 sm:overflow-y-auto sm:pr-1">
                                     {active.lines.map((line) => (
                                         <div
                                             key={line.key}
-                                            className="flex shrink-0 items-center gap-2"
+                                            className="flex shrink-0 flex-wrap items-center gap-2"
                                         >
                                             <select
-                                                className={`${inputClass} min-w-0 flex-1`}
+                                                className={`${inputClass} w-full sm:min-w-0 sm:flex-1`}
                                                 value={line.productId}
                                                 onChange={(event) =>
                                                     selectProduct(line.key, event.target.value)
@@ -594,7 +614,7 @@ export function TicketForm({
 
                                             {line.productId === "" && (
                                                 <input
-                                                    className={`${inputClass} min-w-0 flex-1`}
+                                                    className={`${inputClass} w-full sm:min-w-0 sm:flex-1`}
                                                     value={line.name}
                                                     placeholder={t("customItemPlaceholder")}
                                                     onChange={(event) =>
@@ -670,7 +690,7 @@ export function TicketForm({
                         </>
                     )}
                 </div>
-            </div>
+            </fieldset>
 
             <div className="flex shrink-0 items-center justify-between gap-2 border-t pt-4">
                 <div className="flex min-w-0 items-center gap-3">

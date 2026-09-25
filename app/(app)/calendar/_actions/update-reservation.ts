@@ -31,8 +31,28 @@ export async function updateReservation(formData: FormData) {
     if (!existing) redirect("/calendar");
 
     const customer = await resolveCustomer(formData);
-    const entries = parseTicketEntries((formData.get("entries") as string) ?? "[]");
     const note = (formData.get("note") as string)?.trim() || null;
+
+    if (!customer) {
+        await db.reservation.update({
+            where: { id },
+            data: {
+                date,
+                startMinutes,
+                durationMinutes,
+                note,
+                customerId: null,
+                customerName: null,
+            },
+        });
+
+        revalidatePath("/calendar");
+        revalidatePath("/");
+        revalidatePath("/customers");
+        redirect(`/calendar?month=${date.slice(0, 7)}`);
+    }
+
+    const entries = parseTicketEntries((formData.get("entries") as string) ?? "[]");
 
     await db.reservation.update({
         where: { id },
@@ -41,8 +61,8 @@ export async function updateReservation(formData: FormData) {
             startMinutes,
             durationMinutes,
             note,
-            customerId: customer?.id ?? null,
-            customerName: customer?.name ?? null,
+            customerId: customer.id,
+            customerName: customer.name,
         },
     });
 
@@ -50,7 +70,7 @@ export async function updateReservation(formData: FormData) {
     let linkedBike: { id: string; name: string } | null = null;
     let extras = entries;
 
-    if (existing.ticketId && customer && entries[0]) {
+    if (existing.ticketId && entries[0]) {
         const current = entries[0];
         const bike = await resolveBike(current, customer.id);
         const intakeNote = String(current.intakeNote ?? "").trim() || null;
@@ -62,7 +82,8 @@ export async function updateReservation(formData: FormData) {
                 where: { id: existing.ticketId },
                 data: {
                     intakeNote,
-                    ...(bike ? { bikeId: bike.id } : {}),
+                    customerId: customer.id,
+                    bikeId: bike?.id ?? null,
                     items: {
                         create: items.map((item, index) => ({
                             ...item,
@@ -75,7 +96,7 @@ export async function updateReservation(formData: FormData) {
 
         linkedBike = bike ? { id: bike.id, name: bike.name } : null;
         extras = entries.slice(1);
-    } else if (!existing.ticketId && customer && entries[0]) {
+    } else if (!existing.ticketId && entries[0]) {
         const current = entries[0];
         const bike = await resolveBike(current, customer.id);
         const intakeNote = String(current.intakeNote ?? "").trim() || null;
@@ -99,33 +120,31 @@ export async function updateReservation(formData: FormData) {
         extras = entries.slice(1);
     }
 
-    if (customer) {
-        for (const entry of extras) {
-            const bike = await resolveBike(entry, customer.id);
-            if (!bike) continue;
+    for (const entry of extras) {
+        const bike = await resolveBike(entry, customer.id);
+        if (!bike) continue;
 
-            const intakeNote = String(entry.intakeNote ?? "").trim() || null;
-            const items = parseTicketLines(JSON.stringify(entry.items ?? []));
-            if (!intakeNote && items.length === 0) continue;
+        const intakeNote = String(entry.intakeNote ?? "").trim() || null;
+        const items = parseTicketLines(JSON.stringify(entry.items ?? []));
+        if (!intakeNote && items.length === 0) continue;
 
-            const ticket = await db.ticket.create({
-                data: {
-                    intakeNote,
-                    customerId: customer.id,
-                    bikeId: bike.id,
-                    createdById: session?.user?.id ?? null,
-                    items: {
-                        create: items.map((item, index) => ({ ...item, sortOrder: index })),
-                    },
+        const ticket = await db.ticket.create({
+            data: {
+                intakeNote,
+                customerId: customer.id,
+                bikeId: bike.id,
+                createdById: session?.user?.id ?? null,
+                items: {
+                    create: items.map((item, index) => ({ ...item, sortOrder: index })),
                 },
-            });
+            },
+        });
 
-            linkedTicketId ??= ticket.id;
-            linkedBike ??= { id: bike.id, name: bike.name };
-        }
+        linkedTicketId ??= ticket.id;
+        linkedBike ??= { id: bike.id, name: bike.name };
     }
 
-    if (!linkedTicketId && customer) {
+    if (!linkedTicketId) {
         const firstBike = entries[0] ? await resolveBike(entries[0], customer.id) : null;
         const ticket = await db.ticket.create({
             data: {
