@@ -1,0 +1,19 @@
+{
+    "name": "Bike Shop",
+    "short_name": "Bike Shop",
+    "description": "Internal app for running a small bike shop.",
+    "id": "/",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "icons": [
+        {
+            "src": "/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        }
+    ]
+}
