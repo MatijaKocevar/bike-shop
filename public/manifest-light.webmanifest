@@ -1,6 +1,6 @@
 {
-    "name": "Bike Shop",
-    "short_name": "Bike Shop",
+    "name": "Bicikl Kočevar",
+    "short_name": "Bicikl Kočevar",
     "description": "Internal app for running a small bike shop.",
     "id": "/",
     "start_url": "/",

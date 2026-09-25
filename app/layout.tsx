@@ -27,14 +27,14 @@ export async function generateMetadata(): Promise<Metadata> {
 
     return {
         title: {
-            default: "Bike Shop",
-            template: "%s · Bike Shop",
+            default: "Bicikl Kočevar",
+            template: "%s · Bicikl Kočevar",
         },
         description: t("description"),
         manifest: "/manifest-light.webmanifest",
         appleWebApp: {
             capable: true,
-            title: "Bike Shop",
+            title: "Bicikl Kočevar",
             statusBarStyle: "default",
         },
     };

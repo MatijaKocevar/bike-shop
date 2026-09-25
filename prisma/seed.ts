@@ -35,7 +35,7 @@ async function main() {
     }
 
     const settingsData = [
-        { key: "shopName", value: "Bike Shop" },
+        { key: "shopName", value: "Bicikl Kočevar" },
         { key: "receiptFooter", value: "Hvala za zaupanje!" },
     ];
 
