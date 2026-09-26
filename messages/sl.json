@@ -133,6 +133,8 @@
         "photoDescription": "Opis",
         "removePhoto": "Odstrani fotografijo",
         "downloadPhoto": "Prenesi",
+        "photoUploading": "Nalaganje …",
+        "photoUploadFailed": "Nalaganje fotografije ni uspelo. Poskusite znova.",
         "count": "{count, plural, one {# nalog} two {# naloga} few {# nalogi} other {# nalogov}}"
     },
     "ticketStatus": {
