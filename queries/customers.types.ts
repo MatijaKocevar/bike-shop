@@ -32,6 +32,7 @@ export type CustomerTicketSummary = {
     number: number;
     status: TicketStatus;
     itemsCount: number;
+    bikeName: string | null;
     createdAt: Date;
 };
 

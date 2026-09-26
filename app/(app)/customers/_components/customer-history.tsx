@@ -50,7 +50,12 @@ export async function CustomerHistory({
                                             <span className="font-medium tabular-nums">
                                                 #{ticket.number}
                                             </span>
-                                            <span className="text-muted-foreground">
+                                            {ticket.bikeName && (
+                                                <span className="truncate text-muted-foreground">
+                                                    {ticket.bikeName}
+                                                </span>
+                                            )}
+                                            <span className="shrink-0 text-muted-foreground">
                                                 {ticket.createdAt.toLocaleDateString(locale)}
                                             </span>
                                         </span>
