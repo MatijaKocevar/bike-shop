@@ -132,6 +132,7 @@
         "noPhotos": "No photos yet. Take a photo or attach one.",
         "photoDescription": "Description",
         "removePhoto": "Remove photo",
+        "downloadPhoto": "Download",
         "count": "{count, plural, one {# ticket} other {# tickets}}"
     },
     "ticketStatus": {

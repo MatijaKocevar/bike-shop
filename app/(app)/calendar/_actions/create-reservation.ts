@@ -43,18 +43,20 @@ export async function createReservation(formData: FormData) {
     let linkedBike: { id: string; name: string } | null = null;
 
     for (const entry of entries) {
-        const bike = customer ? await resolveBike(entry, customer.id) : null;
-        if (!bike) continue;
+        if (!customer) continue;
 
         const intakeNote = String(entry.intakeNote ?? "").trim() || null;
         const items = parseTicketLines(JSON.stringify(entry.items ?? []));
-        if (!intakeNote && items.length === 0) continue;
+
+        if (!entry.active && !entry.newBike && !intakeNote && items.length === 0) continue;
+
+        const bike = await resolveBike(entry, customer.id);
 
         const ticket = await db.ticket.create({
             data: {
                 intakeNote,
-                customerId: customer!.id,
-                bikeId: bike.id,
+                customerId: customer.id,
+                bikeId: bike?.id ?? null,
                 createdById: session.user.id,
                 items: {
                     create: items.map((item, index) => ({ ...item, sortOrder: index })),
@@ -63,7 +65,7 @@ export async function createReservation(formData: FormData) {
         });
 
         linkedTicketId ??= ticket.id;
-        linkedBike ??= { id: bike.id, name: bike.name };
+        if (!linkedBike && bike) linkedBike = { id: bike.id, name: bike.name };
     }
 
     if (!linkedTicketId && customer) {

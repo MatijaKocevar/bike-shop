@@ -35,21 +35,22 @@ export async function createTicket(formData: FormData) {
     if (!customer) redirect("/tickets?new=1");
 
     const entries = parseTicketEntries((formData.get("entries") as string) ?? "[]");
+    const photos = parseTicketPhotoInputs(formData.get("photos") as string | null);
     const createdIds: string[] = [];
 
     for (const entry of entries) {
-        const bike = await resolveBike(entry, customer.id);
-        if (!bike) continue;
-
         const intakeNote = String(entry.intakeNote ?? "").trim() || null;
         const items = parseTicketLines(JSON.stringify(entry.items ?? []));
-        if (!intakeNote && items.length === 0) continue;
+
+        if (!entry.active && !entry.newBike && !intakeNote && items.length === 0) continue;
+
+        const bike = await resolveBike(entry, customer.id);
 
         const ticket = await db.ticket.create({
             data: {
                 intakeNote,
                 customerId: customer.id,
-                bikeId: bike.id,
+                bikeId: bike?.id ?? null,
                 createdById: session.user.id,
                 items: {
                     create: items.map((item, index) => ({ ...item, sortOrder: index })),
@@ -60,9 +61,15 @@ export async function createTicket(formData: FormData) {
         createdIds.push(ticket.id);
     }
 
-    if (createdIds.length === 0) redirect("/tickets?new=1");
+    if (createdIds.length === 0 && photos.length > 0) {
+        const ticket = await db.ticket.create({
+            data: { customerId: customer.id, createdById: session.user.id },
+        });
 
-    const photos = parseTicketPhotoInputs(formData.get("photos") as string | null);
+        createdIds.push(ticket.id);
+    }
+
+    if (createdIds.length === 0) redirect("/tickets?new=1");
 
     if (photos.length > 0) {
         await db.ticketImage.createMany({

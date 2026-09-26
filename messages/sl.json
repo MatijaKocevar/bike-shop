@@ -132,6 +132,7 @@
         "noPhotos": "Ni še fotografij. Fotografirajte ali priložite datoteko.",
         "photoDescription": "Opis",
         "removePhoto": "Odstrani fotografijo",
+        "downloadPhoto": "Prenesi",
         "count": "{count, plural, one {# nalog} two {# naloga} few {# nalogi} other {# nalogov}}"
     },
     "ticketStatus": {
