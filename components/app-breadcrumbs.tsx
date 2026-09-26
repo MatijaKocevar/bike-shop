@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 const NAVIGABLE_SEGMENTS = [
     "calendar",
     "tickets",
+    "orders",
     "products",
     "receipts",
     "customers",

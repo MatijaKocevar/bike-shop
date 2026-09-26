@@ -13,6 +13,7 @@ import {
     Package,
     Receipt,
     Settings,
+    ShoppingCart,
     Users,
     LogOut,
 } from "lucide-react";
@@ -46,6 +47,7 @@ export function AppSidebar({ email }: AppSidebarProps) {
         { href: "/", label: t("dashboard"), icon: LayoutDashboard, exact: true },
         { href: "/calendar", label: t("calendar"), icon: CalendarDays, exact: false },
         { href: "/tickets", label: t("tickets"), icon: ClipboardList, exact: false },
+        { href: "/orders", label: t("orders"), icon: ShoppingCart, exact: false },
         { href: "/products", label: t("products"), icon: Package, exact: false },
         { href: "/receipts", label: t("receipts"), icon: Receipt, exact: false },
         { href: "/customers", label: t("customers"), icon: Contact, exact: false },
