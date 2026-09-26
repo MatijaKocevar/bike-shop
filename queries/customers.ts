@@ -46,6 +46,7 @@ export async function getCustomerById(id: string): Promise<CustomerDetail | null
                     number: true,
                     status: true,
                     createdAt: true,
+                    bike: { select: { name: true } },
                     _count: { select: { items: true } },
                 },
                 orderBy: { createdAt: "desc" },
@@ -94,6 +95,7 @@ export async function getCustomerById(id: string): Promise<CustomerDetail | null
             number: ticket.number,
             status: ticket.status,
             itemsCount: ticket._count.items,
+            bikeName: ticket.bike?.name ?? null,
             createdAt: ticket.createdAt,
         })),
         receipts: customer.receipts.map((receipt) => ({
