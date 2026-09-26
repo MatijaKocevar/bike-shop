@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
+import { parseBikeInputs } from "../_utils/parse-bike-inputs";
 
 export async function saveCustomer(formData: FormData) {
     const id = (formData.get("id") as string) || null;
@@ -19,7 +20,11 @@ export async function saveCustomer(formData: FormData) {
     if (id) {
         await db.customer.update({ where: { id }, data });
     } else {
-        await db.customer.create({ data });
+        const bikes = parseBikeInputs(formData.get("bikes") as string | null);
+
+        await db.customer.create({
+            data: { ...data, bikes: { create: bikes } },
+        });
     }
 
     revalidatePath("/customers");
