@@ -13,10 +13,7 @@ export async function saveBike(formData: FormData) {
 
     const data = {
         name,
-        brand: (formData.get("brand") as string)?.trim() || null,
-        model: (formData.get("model") as string)?.trim() || null,
         color: (formData.get("color") as string)?.trim() || null,
-        serial: (formData.get("serial") as string)?.trim() || null,
         note: (formData.get("note") as string)?.trim() || null,
     };
 

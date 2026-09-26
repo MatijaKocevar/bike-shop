@@ -124,10 +124,7 @@
         "newBike": "Novo kolo",
         "newBikeHint": "Novo kolo bo dodano izbrani stranki.",
         "bikeNamePlaceholder": "Ime kolesa (npr. Trek Marlin 7)",
-        "bikeBrandPlaceholder": "Znamka",
-        "bikeModelPlaceholder": "Model",
         "bikeColorPlaceholder": "Barva",
-        "bikeSerialPlaceholder": "Številka okvira",
         "count": "{count, plural, one {# nalog} two {# naloga} few {# nalogi} other {# nalogov}}"
     },
     "ticketStatus": {
@@ -153,10 +150,7 @@
         "deleteBike": "Izbriši kolo",
         "bikeName": "Ime kolesa",
         "bikeNamePlaceholder": "npr. Trek Marlin 7",
-        "brand": "Znamka",
-        "model": "Model",
         "color": "Barva",
-        "serial": "Številka okvira",
         "tickets": "Nalogi",
         "receipts": "Računi",
         "noTickets": "Ni še nalogov.",

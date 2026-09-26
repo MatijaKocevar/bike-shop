@@ -13,10 +13,7 @@ export type TicketBikeTab = {
     bikeName: string;
     newBike: {
         name: string;
-        brand: string;
-        model: string;
         color: string;
-        serial: string;
     };
     intakeNote: string;
     lines: TicketLineDraft[];
