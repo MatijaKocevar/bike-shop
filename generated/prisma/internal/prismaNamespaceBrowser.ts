@@ -66,6 +66,7 @@ export const ModelName = {
   Receipt: 'Receipt',
   ReceiptItem: 'ReceiptItem',
   Reservation: 'Reservation',
+  PushSubscription: 'PushSubscription',
   Order: 'Order',
   Setting: 'Setting'
 } as const
@@ -295,6 +296,7 @@ export const ReservationScalarFieldEnum = {
   bikeName: 'bikeName',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  remindedAt: 'remindedAt',
   customerId: 'customerId',
   bikeId: 'bikeId',
   ticketId: 'ticketId',
@@ -302,6 +304,18 @@ export const ReservationScalarFieldEnum = {
 } as const
 
 export type ReservationScalarFieldEnum = (typeof ReservationScalarFieldEnum)[keyof typeof ReservationScalarFieldEnum]
+
+
+export const PushSubscriptionScalarFieldEnum = {
+  id: 'id',
+  endpoint: 'endpoint',
+  p256dh: 'p256dh',
+  auth: 'auth',
+  createdAt: 'createdAt',
+  userId: 'userId'
+} as const
+
+export type PushSubscriptionScalarFieldEnum = (typeof PushSubscriptionScalarFieldEnum)[keyof typeof PushSubscriptionScalarFieldEnum]
 
 
 export const OrderScalarFieldEnum = {

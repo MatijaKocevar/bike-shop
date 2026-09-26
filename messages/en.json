@@ -261,7 +261,17 @@
         "taxId": "Tax ID",
         "iban": "IBAN",
         "receiptFooter": "Receipt footer",
-        "saved": "Saved"
+        "saved": "Saved",
+        "notificationsSection": "Notifications",
+        "notificationsHint": "Get a reminder on this device one hour before a reservation starts.",
+        "notificationsEnable": "Enable notifications",
+        "notificationsDisable": "Disable notifications",
+        "notificationsEnabled": "Notifications are enabled on this device.",
+        "notificationsDenied": "Notifications are blocked. Allow them in your browser settings and try again.",
+        "notificationsUnsupported": "This browser does not support push notifications."
+    },
+    "notifications": {
+        "reservationTitle": "Reservation in 1 hour"
     },
     "users": {
         "title": "Users",

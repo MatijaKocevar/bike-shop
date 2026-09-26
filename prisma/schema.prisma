@@ -49,6 +49,8 @@ model User {
   tickets      Ticket[]
   reservations Reservation[]
   orders       Order[]
+
+  pushSubscriptions PushSubscription[]
 }
 
 model Account {
@@ -277,6 +279,7 @@ model Reservation {
   bikeName        String?
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+  remindedAt      DateTime?
 
   customerId String?
   customer   Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
@@ -291,6 +294,19 @@ model Reservation {
   createdBy   User?   @relation(fields: [createdById], references: [id], onDelete: SetNull)
 
   @@index([date])
+}
+
+// ---- Push notifications ----
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // ---- Orders ----

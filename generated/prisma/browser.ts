@@ -93,6 +93,11 @@ export type ReceiptItem = Prisma.ReceiptItemModel
  */
 export type Reservation = Prisma.ReservationModel
 /**
+ * Model PushSubscription
+ * 
+ */
+export type PushSubscription = Prisma.PushSubscriptionModel
+/**
  * Model Order
  * 
  */

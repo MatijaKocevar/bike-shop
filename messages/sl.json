@@ -261,7 +261,17 @@
         "taxId": "ID za DDV",
         "iban": "IBAN",
         "receiptFooter": "Noga računa",
-        "saved": "Shranjeno"
+        "saved": "Shranjeno",
+        "notificationsSection": "Obvestila",
+        "notificationsHint": "Na tej napravi prejmite opomnik eno uro pred začetkom rezervacije.",
+        "notificationsEnable": "Omogoči obvestila",
+        "notificationsDisable": "Onemogoči obvestila",
+        "notificationsEnabled": "Obvestila so na tej napravi omogočena.",
+        "notificationsDenied": "Obvestila so blokirana. Dovolite jih v nastavitvah brskalnika in poskusite znova.",
+        "notificationsUnsupported": "Ta brskalnik ne podpira potisnih obvestil."
+    },
+    "notifications": {
+        "reservationTitle": "Rezervacija čez 1 uro"
     },
     "users": {
         "title": "Uporabniki",

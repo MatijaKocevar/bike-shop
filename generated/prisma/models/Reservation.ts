@@ -46,6 +46,7 @@ export type ReservationMinAggregateOutputType = {
   bikeName: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  remindedAt: Date | null
   customerId: string | null
   bikeId: string | null
   ticketId: string | null
@@ -62,6 +63,7 @@ export type ReservationMaxAggregateOutputType = {
   bikeName: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  remindedAt: Date | null
   customerId: string | null
   bikeId: string | null
   ticketId: string | null
@@ -78,6 +80,7 @@ export type ReservationCountAggregateOutputType = {
   bikeName: number
   createdAt: number
   updatedAt: number
+  remindedAt: number
   customerId: number
   bikeId: number
   ticketId: number
@@ -106,6 +109,7 @@ export type ReservationMinAggregateInputType = {
   bikeName?: true
   createdAt?: true
   updatedAt?: true
+  remindedAt?: true
   customerId?: true
   bikeId?: true
   ticketId?: true
@@ -122,6 +126,7 @@ export type ReservationMaxAggregateInputType = {
   bikeName?: true
   createdAt?: true
   updatedAt?: true
+  remindedAt?: true
   customerId?: true
   bikeId?: true
   ticketId?: true
@@ -138,6 +143,7 @@ export type ReservationCountAggregateInputType = {
   bikeName?: true
   createdAt?: true
   updatedAt?: true
+  remindedAt?: true
   customerId?: true
   bikeId?: true
   ticketId?: true
@@ -241,6 +247,7 @@ export type ReservationGroupByOutputType = {
   bikeName: string | null
   createdAt: Date
   updatedAt: Date
+  remindedAt: Date | null
   customerId: string | null
   bikeId: string | null
   ticketId: string | null
@@ -280,6 +287,7 @@ export type ReservationWhereInput = {
   bikeName?: Prisma.StringNullableFilter<"Reservation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Reservation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reservation"> | Date | string
+  remindedAt?: Prisma.DateTimeNullableFilter<"Reservation"> | Date | string | null
   customerId?: Prisma.StringNullableFilter<"Reservation"> | string | null
   bikeId?: Prisma.StringNullableFilter<"Reservation"> | string | null
   ticketId?: Prisma.StringNullableFilter<"Reservation"> | string | null
@@ -300,6 +308,7 @@ export type ReservationOrderByWithRelationInput = {
   bikeName?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  remindedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrderInput | Prisma.SortOrder
   bikeId?: Prisma.SortOrderInput | Prisma.SortOrder
   ticketId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -323,6 +332,7 @@ export type ReservationWhereUniqueInput = Prisma.AtLeast<{
   bikeName?: Prisma.StringNullableFilter<"Reservation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Reservation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reservation"> | Date | string
+  remindedAt?: Prisma.DateTimeNullableFilter<"Reservation"> | Date | string | null
   customerId?: Prisma.StringNullableFilter<"Reservation"> | string | null
   bikeId?: Prisma.StringNullableFilter<"Reservation"> | string | null
   ticketId?: Prisma.StringNullableFilter<"Reservation"> | string | null
@@ -343,6 +353,7 @@ export type ReservationOrderByWithAggregationInput = {
   bikeName?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  remindedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrderInput | Prisma.SortOrder
   bikeId?: Prisma.SortOrderInput | Prisma.SortOrder
   ticketId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -367,6 +378,7 @@ export type ReservationScalarWhereWithAggregatesInput = {
   bikeName?: Prisma.StringNullableWithAggregatesFilter<"Reservation"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Reservation"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Reservation"> | Date | string
+  remindedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Reservation"> | Date | string | null
   customerId?: Prisma.StringNullableWithAggregatesFilter<"Reservation"> | string | null
   bikeId?: Prisma.StringNullableWithAggregatesFilter<"Reservation"> | string | null
   ticketId?: Prisma.StringNullableWithAggregatesFilter<"Reservation"> | string | null
@@ -383,6 +395,7 @@ export type ReservationCreateInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customer?: Prisma.CustomerCreateNestedOneWithoutReservationsInput
   bike?: Prisma.BikeCreateNestedOneWithoutReservationsInput
   ticket?: Prisma.TicketCreateNestedOneWithoutReservationsInput
@@ -399,6 +412,7 @@ export type ReservationUncheckedCreateInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customerId?: string | null
   bikeId?: string | null
   ticketId?: string | null
@@ -415,6 +429,7 @@ export type ReservationUpdateInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customer?: Prisma.CustomerUpdateOneWithoutReservationsNestedInput
   bike?: Prisma.BikeUpdateOneWithoutReservationsNestedInput
   ticket?: Prisma.TicketUpdateOneWithoutReservationsNestedInput
@@ -431,6 +446,7 @@ export type ReservationUncheckedUpdateInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bikeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -447,6 +463,7 @@ export type ReservationCreateManyInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customerId?: string | null
   bikeId?: string | null
   ticketId?: string | null
@@ -463,6 +480,7 @@ export type ReservationUpdateManyMutationInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ReservationUncheckedUpdateManyInput = {
@@ -475,6 +493,7 @@ export type ReservationUncheckedUpdateManyInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bikeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -501,6 +520,7 @@ export type ReservationCountOrderByAggregateInput = {
   bikeName?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  remindedAt?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   bikeId?: Prisma.SortOrder
   ticketId?: Prisma.SortOrder
@@ -522,6 +542,7 @@ export type ReservationMaxOrderByAggregateInput = {
   bikeName?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  remindedAt?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   bikeId?: Prisma.SortOrder
   ticketId?: Prisma.SortOrder
@@ -538,6 +559,7 @@ export type ReservationMinOrderByAggregateInput = {
   bikeName?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  remindedAt?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
   bikeId?: Prisma.SortOrder
   ticketId?: Prisma.SortOrder
@@ -727,6 +749,7 @@ export type ReservationCreateWithoutCreatedByInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customer?: Prisma.CustomerCreateNestedOneWithoutReservationsInput
   bike?: Prisma.BikeCreateNestedOneWithoutReservationsInput
   ticket?: Prisma.TicketCreateNestedOneWithoutReservationsInput
@@ -742,6 +765,7 @@ export type ReservationUncheckedCreateWithoutCreatedByInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customerId?: string | null
   bikeId?: string | null
   ticketId?: string | null
@@ -786,6 +810,7 @@ export type ReservationScalarWhereInput = {
   bikeName?: Prisma.StringNullableFilter<"Reservation"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Reservation"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reservation"> | Date | string
+  remindedAt?: Prisma.DateTimeNullableFilter<"Reservation"> | Date | string | null
   customerId?: Prisma.StringNullableFilter<"Reservation"> | string | null
   bikeId?: Prisma.StringNullableFilter<"Reservation"> | string | null
   ticketId?: Prisma.StringNullableFilter<"Reservation"> | string | null
@@ -802,6 +827,7 @@ export type ReservationCreateWithoutCustomerInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   bike?: Prisma.BikeCreateNestedOneWithoutReservationsInput
   ticket?: Prisma.TicketCreateNestedOneWithoutReservationsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutReservationsInput
@@ -817,6 +843,7 @@ export type ReservationUncheckedCreateWithoutCustomerInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   bikeId?: string | null
   ticketId?: string | null
   createdById?: string | null
@@ -858,6 +885,7 @@ export type ReservationCreateWithoutBikeInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customer?: Prisma.CustomerCreateNestedOneWithoutReservationsInput
   ticket?: Prisma.TicketCreateNestedOneWithoutReservationsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutReservationsInput
@@ -873,6 +901,7 @@ export type ReservationUncheckedCreateWithoutBikeInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customerId?: string | null
   ticketId?: string | null
   createdById?: string | null
@@ -914,6 +943,7 @@ export type ReservationCreateWithoutTicketInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customer?: Prisma.CustomerCreateNestedOneWithoutReservationsInput
   bike?: Prisma.BikeCreateNestedOneWithoutReservationsInput
   createdBy?: Prisma.UserCreateNestedOneWithoutReservationsInput
@@ -929,6 +959,7 @@ export type ReservationUncheckedCreateWithoutTicketInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customerId?: string | null
   bikeId?: string | null
   createdById?: string | null
@@ -970,6 +1001,7 @@ export type ReservationCreateManyCreatedByInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customerId?: string | null
   bikeId?: string | null
   ticketId?: string | null
@@ -985,6 +1017,7 @@ export type ReservationUpdateWithoutCreatedByInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customer?: Prisma.CustomerUpdateOneWithoutReservationsNestedInput
   bike?: Prisma.BikeUpdateOneWithoutReservationsNestedInput
   ticket?: Prisma.TicketUpdateOneWithoutReservationsNestedInput
@@ -1000,6 +1033,7 @@ export type ReservationUncheckedUpdateWithoutCreatedByInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bikeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1015,6 +1049,7 @@ export type ReservationUncheckedUpdateManyWithoutCreatedByInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bikeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1030,6 +1065,7 @@ export type ReservationCreateManyCustomerInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   bikeId?: string | null
   ticketId?: string | null
   createdById?: string | null
@@ -1045,6 +1081,7 @@ export type ReservationUpdateWithoutCustomerInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bike?: Prisma.BikeUpdateOneWithoutReservationsNestedInput
   ticket?: Prisma.TicketUpdateOneWithoutReservationsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutReservationsNestedInput
@@ -1060,6 +1097,7 @@ export type ReservationUncheckedUpdateWithoutCustomerInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bikeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1075,6 +1113,7 @@ export type ReservationUncheckedUpdateManyWithoutCustomerInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   bikeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1090,6 +1129,7 @@ export type ReservationCreateManyBikeInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customerId?: string | null
   ticketId?: string | null
   createdById?: string | null
@@ -1105,6 +1145,7 @@ export type ReservationUpdateWithoutBikeInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customer?: Prisma.CustomerUpdateOneWithoutReservationsNestedInput
   ticket?: Prisma.TicketUpdateOneWithoutReservationsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutReservationsNestedInput
@@ -1120,6 +1161,7 @@ export type ReservationUncheckedUpdateWithoutBikeInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1135,6 +1177,7 @@ export type ReservationUncheckedUpdateManyWithoutBikeInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   ticketId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1150,6 +1193,7 @@ export type ReservationCreateManyTicketInput = {
   bikeName?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  remindedAt?: Date | string | null
   customerId?: string | null
   bikeId?: string | null
   createdById?: string | null
@@ -1165,6 +1209,7 @@ export type ReservationUpdateWithoutTicketInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customer?: Prisma.CustomerUpdateOneWithoutReservationsNestedInput
   bike?: Prisma.BikeUpdateOneWithoutReservationsNestedInput
   createdBy?: Prisma.UserUpdateOneWithoutReservationsNestedInput
@@ -1180,6 +1225,7 @@ export type ReservationUncheckedUpdateWithoutTicketInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bikeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1195,6 +1241,7 @@ export type ReservationUncheckedUpdateManyWithoutTicketInput = {
   bikeName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remindedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bikeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1212,6 +1259,7 @@ export type ReservationSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   bikeName?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  remindedAt?: boolean
   customerId?: boolean
   bikeId?: boolean
   ticketId?: boolean
@@ -1232,6 +1280,7 @@ export type ReservationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   bikeName?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  remindedAt?: boolean
   customerId?: boolean
   bikeId?: boolean
   ticketId?: boolean
@@ -1252,6 +1301,7 @@ export type ReservationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   bikeName?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  remindedAt?: boolean
   customerId?: boolean
   bikeId?: boolean
   ticketId?: boolean
@@ -1272,13 +1322,14 @@ export type ReservationSelectScalar = {
   bikeName?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  remindedAt?: boolean
   customerId?: boolean
   bikeId?: boolean
   ticketId?: boolean
   createdById?: boolean
 }
 
-export type ReservationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "startMinutes" | "durationMinutes" | "note" | "customerName" | "bikeName" | "createdAt" | "updatedAt" | "customerId" | "bikeId" | "ticketId" | "createdById", ExtArgs["result"]["reservation"]>
+export type ReservationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "date" | "startMinutes" | "durationMinutes" | "note" | "customerName" | "bikeName" | "createdAt" | "updatedAt" | "remindedAt" | "customerId" | "bikeId" | "ticketId" | "createdById", ExtArgs["result"]["reservation"]>
 export type ReservationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   customer?: boolean | Prisma.Reservation$customerArgs<ExtArgs>
   bike?: boolean | Prisma.Reservation$bikeArgs<ExtArgs>
@@ -1316,6 +1367,7 @@ export type $ReservationPayload<ExtArgs extends runtime.Types.Extensions.Interna
     bikeName: string | null
     createdAt: Date
     updatedAt: Date
+    remindedAt: Date | null
     customerId: string | null
     bikeId: string | null
     ticketId: string | null
@@ -1756,6 +1808,7 @@ export interface ReservationFieldRefs {
   readonly bikeName: Prisma.FieldRef<"Reservation", 'String'>
   readonly createdAt: Prisma.FieldRef<"Reservation", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Reservation", 'DateTime'>
+  readonly remindedAt: Prisma.FieldRef<"Reservation", 'DateTime'>
   readonly customerId: Prisma.FieldRef<"Reservation", 'String'>
   readonly bikeId: Prisma.FieldRef<"Reservation", 'String'>
   readonly ticketId: Prisma.FieldRef<"Reservation", 'String'>

@@ -4,7 +4,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 const nextConfig: NextConfig = {
     output: "standalone",
     allowedDevOrigins: ["10.8.0.4", "192.168.0.175"],
-    serverExternalPackages: ["@react-pdf/renderer"],
+    serverExternalPackages: ["@react-pdf/renderer", "web-push"],
     outputFileTracingIncludes: {
         "/api/receipts/[id]/pdf": ["./assets/fonts/**"],
     },
