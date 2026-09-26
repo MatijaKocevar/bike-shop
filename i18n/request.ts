@@ -1,8 +1,6 @@
 import { getRequestConfig } from "next-intl/server";
 import { cookies, headers } from "next/headers";
-
-export const locales = ["en", "sl"] as const;
-export const defaultLocale: (typeof locales)[number] = "en";
+import { defaultLocale, locales } from "./config";
 
 function negotiateFromAcceptLanguage(acceptLanguage: string): (typeof locales)[number] {
     const first = acceptLanguage.split(",")[0].trim().slice(0, 2).toLowerCase();

@@ -83,6 +83,10 @@ Downtime is a few seconds. Take a manual DB backup first if a migration worries 
 passwords and `openssl rand -base64 32` for `AUTH_SECRET`. `NEXT_PUBLIC_*` values are
 inlined at build time — change them in `.env`, then redeploy (rebuild required).
 
+Web push needs a VAPID key pair: `pnpm exec web-push generate-vapid-keys`, then put
+`VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` and the matching
+`NEXT_PUBLIC_VAPID_PUBLIC_KEY` into `.env`.
+
 Cloudflare IDs: account `c918c4c934eaca37e0caa38f372f71ca`, zone
 `590e2e4de7c41e9d49b3883412e0db54` (`bicikl-kocevar.com`), tunnel
 `9d52d86e-1392-4efc-a882-d48cdc339f10` (`bikeshop`). Tunnel ingress is

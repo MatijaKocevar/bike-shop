@@ -48,6 +48,7 @@ services:
             args:
                 NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
                 NEXT_PUBLIC_S3_PUBLIC_URL: ${NEXT_PUBLIC_S3_PUBLIC_URL:-}
+                NEXT_PUBLIC_VAPID_PUBLIC_KEY: ${NEXT_PUBLIC_VAPID_PUBLIC_KEY:-}
         env_file: .env
         depends_on:
             db:
@@ -62,6 +63,7 @@ services:
             args:
                 NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
                 NEXT_PUBLIC_S3_PUBLIC_URL: ${NEXT_PUBLIC_S3_PUBLIC_URL:-}
+                NEXT_PUBLIC_VAPID_PUBLIC_KEY: ${NEXT_PUBLIC_VAPID_PUBLIC_KEY:-}
         restart: unless-stopped
         env_file: .env
         depends_on:
