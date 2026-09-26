@@ -133,6 +133,8 @@
         "photoDescription": "Description",
         "removePhoto": "Remove photo",
         "downloadPhoto": "Download",
+        "photoUploading": "Uploading…",
+        "photoUploadFailed": "Photo upload failed. Please try again.",
         "count": "{count, plural, one {# ticket} other {# tickets}}"
     },
     "ticketStatus": {

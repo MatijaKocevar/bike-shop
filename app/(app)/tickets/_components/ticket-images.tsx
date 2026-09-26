@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { Camera, Download, ImagePlus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -25,16 +25,39 @@ type TicketImagesProps = {
 export function TicketImages({ ticketId, images = [] }: TicketImagesProps) {
     const t = useTranslations("tickets");
     const { upload, uploading } = usePresignedUpload();
+    const rootRef = useRef<HTMLDivElement>(null);
     const cameraRef = useRef<HTMLInputElement>(null);
     const fileRef = useRef<HTMLInputElement>(null);
+    const uploadingRef = useRef(false);
+    const pendingSubmitRef = useRef<HTMLFormElement | null>(null);
     const [staged, setStaged] = useState<StagedTicketImage[]>([]);
     const [preview, setPreview] = useState<TicketImagePreview | null>(null);
+    const [failed, setFailed] = useState(false);
     const [pending, startTransition] = useTransition();
     const stagedMode = !ticketId;
+
+    useEffect(() => {
+        const form: HTMLFormElement | null = rootRef.current?.closest("form") ?? null;
+        if (!form) return;
+
+        function onSubmit(event: SubmitEvent) {
+            if (!uploadingRef.current) return;
+
+            event.preventDefault();
+            pendingSubmitRef.current = form;
+        }
+
+        form.addEventListener("submit", onSubmit);
+
+        return () => form.removeEventListener("submit", onSubmit);
+    }, []);
 
     async function addFiles(fileList: FileList | null) {
         const files = Array.from(fileList ?? []);
         if (files.length === 0) return;
+
+        uploadingRef.current = true;
+        setFailed(false);
 
         try {
             for (const file of files) {
@@ -50,9 +73,15 @@ export function TicketImages({ ticketId, images = [] }: TicketImagesProps) {
             }
         } catch (error) {
             console.error(error);
+            setFailed(true);
         } finally {
+            uploadingRef.current = false;
             if (cameraRef.current) cameraRef.current.value = "";
             if (fileRef.current) fileRef.current.value = "";
+
+            const form = pendingSubmitRef.current;
+            pendingSubmitRef.current = null;
+            if (form) window.setTimeout(() => form.requestSubmit(), 50);
         }
     }
 
@@ -108,7 +137,7 @@ export function TicketImages({ ticketId, images = [] }: TicketImagesProps) {
           }));
 
     return (
-        <div className="flex flex-col gap-2">
+        <div ref={rootRef} className="flex flex-col gap-2">
             {stagedMode && <input type="hidden" name="photos" value={JSON.stringify(staged)} />}
 
             <div className="flex items-center justify-between gap-2">
@@ -156,6 +185,10 @@ export function TicketImages({ ticketId, images = [] }: TicketImagesProps) {
                     </Button>
                 </div>
             </div>
+
+            {uploading && <p className="text-sm text-muted-foreground">{t("photoUploading")}</p>}
+
+            {failed && <p className="text-sm text-destructive">{t("photoUploadFailed")}</p>}
 
             {tiles.length === 0 ? (
                 <p className="text-sm text-muted-foreground">{t("noPhotos")}</p>
