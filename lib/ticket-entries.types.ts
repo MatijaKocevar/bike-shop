@@ -8,4 +8,5 @@ export type TicketBikeEntry = {
     } | null;
     intakeNote?: string;
     items?: TicketLineInput[];
+    active?: boolean;
 };

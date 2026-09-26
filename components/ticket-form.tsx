@@ -249,7 +249,13 @@ export function TicketForm({
     const bikeTabs = tabs.filter((tab) => tab.bikeId !== null);
     const newBikeTabs = tabs.filter((tab) => tab.bikeId === null);
     const entries = tabs
-        .filter((tab) => tab.bikeId || tab.newBike.name.trim())
+        .filter(
+            (tab) =>
+                tab.bikeId ||
+                tab.newBike.name.trim() ||
+                tab.intakeNote.trim() ||
+                tab.lines.length > 0,
+        )
         .map((tab) => ({
             bikeId: tab.bikeId,
             newBike: tab.bikeId
@@ -260,13 +266,8 @@ export function TicketForm({
                   },
             intakeNote: tab.intakeNote,
             items: tab.lines,
+            active: tab.key === active.key,
         }));
-    const missingBikeName = tabs.some(
-        (tab) =>
-            !tab.bikeId &&
-            !tab.newBike.name.trim() &&
-            (tab.intakeNote.trim() !== "" || tab.lines.length > 0),
-    );
     const total = active.lines.reduce((sum, line) => sum + line.quantity * line.unitPrice, 0);
     const grandTotal = tabs.reduce(
         (sum, tab) =>
@@ -288,9 +289,7 @@ export function TicketForm({
             : undefined;
     const canSubmit = isReservation
         ? date !== "" && startMinutes !== null
-        : (customerLocked || showCustomerForm || customerId !== "") &&
-          entries.length > 0 &&
-          !missingBikeName;
+        : (customerLocked || showCustomerForm || customerId !== "") && entries.length > 0;
 
     return (
         <form

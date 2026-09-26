@@ -1,18 +1,21 @@
 "use client";
 
 import { useRef, useState, useTransition } from "react";
-import { Camera, ImagePlus, Trash2 } from "lucide-react";
+import { Camera, Download, ImagePlus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { usePresignedUpload } from "@/hooks/use-presigned-upload";
-import { publicUrl } from "@/lib/storage-url";
+import { downloadUrl, publicUrl } from "@/lib/storage-url";
 import type { TicketImageSummary } from "@/queries/tickets.types";
 import { createTicketImageUpload } from "../_actions/create-ticket-image-upload";
 import { removeTicketImage } from "../_actions/remove-ticket-image";
 import { updateTicketImage } from "../_actions/update-ticket-image";
 import { uploadTicketImage } from "../_actions/upload-ticket-image";
 import type { StagedTicketImage } from "../_types/staged-ticket-image";
+import type { TicketImagePreview } from "../_types/ticket-image-preview";
 import type { TicketImageTile } from "../_types/ticket-image-tile";
+import { photoFilename } from "../_utils/photo-filename";
 
 type TicketImagesProps = {
     ticketId?: string;
@@ -25,6 +28,7 @@ export function TicketImages({ ticketId, images = [] }: TicketImagesProps) {
     const cameraRef = useRef<HTMLInputElement>(null);
     const fileRef = useRef<HTMLInputElement>(null);
     const [staged, setStaged] = useState<StagedTicketImage[]>([]);
+    const [preview, setPreview] = useState<TicketImagePreview | null>(null);
     const [pending, startTransition] = useTransition();
     const stagedMode = !ticketId;
 
@@ -160,12 +164,24 @@ export function TicketImages({ ticketId, images = [] }: TicketImagesProps) {
                     {tiles.map((tile) => (
                         <li key={tile.id} className="w-32 shrink-0">
                             <div className="relative overflow-hidden rounded-lg border">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={publicUrl(tile.imageKey)}
-                                    alt={tile.description}
-                                    className="aspect-square w-full object-cover"
-                                />
+                                <button
+                                    type="button"
+                                    className="block w-full cursor-zoom-in"
+                                    onClick={() =>
+                                        setPreview({
+                                            imageKey: tile.imageKey,
+                                            description: tile.description,
+                                            filename: photoFilename(tile.imageKey),
+                                        })
+                                    }
+                                >
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
+                                        src={publicUrl(tile.imageKey)}
+                                        alt={tile.description}
+                                        className="aspect-square w-full object-cover"
+                                    />
+                                </button>
 
                                 <Button
                                     type="button"
@@ -193,6 +209,36 @@ export function TicketImages({ ticketId, images = [] }: TicketImagesProps) {
                     ))}
                 </ul>
             )}
+
+            <Dialog open={preview !== null} onOpenChange={(open) => !open && setPreview(null)}>
+                <DialogContent className="sm:max-w-3xl">
+                    {preview && (
+                        <div className="flex flex-col gap-3">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src={publicUrl(preview.imageKey)}
+                                alt={preview.description}
+                                className="max-h-[70dvh] w-full rounded-lg object-contain"
+                            />
+
+                            <div className="flex items-center justify-between gap-2">
+                                <p className="min-w-0 truncate text-sm text-muted-foreground">
+                                    {preview.description}
+                                </p>
+
+                                <a
+                                    href={downloadUrl(preview.imageKey)}
+                                    download={preview.filename}
+                                    className={buttonVariants({ variant: "outline", size: "sm" })}
+                                >
+                                    <Download className="size-4" />
+                                    {t("downloadPhoto")}
+                                </a>
+                            </div>
+                        </div>
+                    )}
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }

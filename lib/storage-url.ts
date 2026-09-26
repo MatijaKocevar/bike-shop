@@ -7,3 +7,8 @@ export function publicUrl(key: string): string {
     const path = key.split("/").map(encodeURIComponent).join("/");
     return `/api/files/${path}`;
 }
+
+export function downloadUrl(key: string): string {
+    const path = key.split("/").map(encodeURIComponent).join("/");
+    return `/api/files/${path}`;
+}

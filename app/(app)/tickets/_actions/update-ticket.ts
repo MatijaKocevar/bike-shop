@@ -41,18 +41,18 @@ export async function updateTicket(formData: FormData) {
 
     if (ticket.customerId) {
         for (const entry of extra) {
-            const bike = await resolveBike(entry, ticket.customerId);
-            if (!bike) continue;
-
             const intakeNote = String(entry.intakeNote ?? "").trim() || null;
             const items = parseTicketLines(JSON.stringify(entry.items ?? []));
-            if (!intakeNote && items.length === 0) continue;
+
+            if (!entry.active && !entry.newBike && !intakeNote && items.length === 0) continue;
+
+            const bike = await resolveBike(entry, ticket.customerId);
 
             await db.ticket.create({
                 data: {
                     intakeNote,
                     customerId: ticket.customerId,
-                    bikeId: bike.id,
+                    bikeId: bike?.id ?? null,
                     createdById: session?.user?.id ?? null,
                     items: {
                         create: items.map((item, index) => ({ ...item, sortOrder: index })),
