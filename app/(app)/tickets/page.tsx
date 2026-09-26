@@ -10,6 +10,7 @@ import { listActiveProductOptions } from "@/queries/products";
 import { getTicketById, listTickets } from "@/queries/tickets";
 import { createTicket } from "./_actions/create-ticket";
 import { updateTicket } from "./_actions/update-ticket";
+import { TicketImages } from "./_components/ticket-images";
 import { TicketStatusActions } from "./_components/ticket-status-actions";
 import { TicketsTable } from "./_components/tickets-table";
 
@@ -82,6 +83,7 @@ export default async function TicketsPage({ searchParams }: TicketsPageProps) {
                         updateAction={updateTicket}
                         ticket={editing}
                         actions={<TicketStatusActions ticket={editing} />}
+                        photos={<TicketImages ticketId={editing.id} images={editing.images} />}
                     />
                 ) : null}
             </FormDialog>

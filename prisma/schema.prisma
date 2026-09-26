@@ -48,6 +48,7 @@ model User {
   receipts     Receipt[]
   tickets      Ticket[]
   reservations Reservation[]
+  orders       Order[]
 }
 
 model Account {
@@ -103,6 +104,7 @@ model Customer {
   tickets      Ticket[]
   receipts     Receipt[]
   reservations Reservation[]
+  orders       Order[]
 }
 
 model Bike {
@@ -187,6 +189,18 @@ model Ticket {
 
   items        TicketItem[]
   reservations Reservation[]
+  images       TicketImage[]
+}
+
+model TicketImage {
+  id          String   @id @default(cuid())
+  key         String
+  description String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  ticketId String
+  ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
 }
 
 model TicketItem {
@@ -277,6 +291,26 @@ model Reservation {
   createdBy   User?   @relation(fields: [createdById], references: [id], onDelete: SetNull)
 
   @@index([date])
+}
+
+// ---- Orders ----
+
+model Order {
+  id           String   @id @default(cuid())
+  name         String
+  expectedAt   String
+  note         String?
+  customerName String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  customerId String?
+  customer   Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+
+  createdById String?
+  createdBy   User?   @relation(fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([expectedAt])
 }
 
 // ---- Settings (key/value) ----

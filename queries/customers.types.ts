@@ -51,6 +51,12 @@ export type CustomerReservationSummary = {
     note: string | null;
 };
 
+export type CustomerOrderSummary = {
+    id: string;
+    name: string;
+    expectedAt: string;
+};
+
 export type CustomerDetail = {
     id: string;
     name: string;
@@ -61,4 +67,5 @@ export type CustomerDetail = {
     tickets: CustomerTicketSummary[];
     receipts: CustomerReceiptSummary[];
     reservations: CustomerReservationSummary[];
+    orders: CustomerOrderSummary[];
 };

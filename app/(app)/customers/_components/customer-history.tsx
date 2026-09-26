@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatTime, parseDateKey } from "@/lib/dates";
 import { formatCurrency } from "@/lib/money";
 import type {
+    CustomerOrderSummary,
     CustomerReceiptSummary,
     CustomerReservationSummary,
     CustomerTicketSummary,
@@ -14,9 +15,15 @@ type CustomerHistoryProps = {
     tickets: CustomerTicketSummary[];
     receipts: CustomerReceiptSummary[];
     reservations: CustomerReservationSummary[];
+    orders: CustomerOrderSummary[];
 };
 
-export async function CustomerHistory({ tickets, receipts, reservations }: CustomerHistoryProps) {
+export async function CustomerHistory({
+    tickets,
+    receipts,
+    reservations,
+    orders,
+}: CustomerHistoryProps) {
     const t = await getTranslations("customers");
     const tTicketStatus = await getTranslations("ticketStatus");
     const tReceiptStatus = await getTranslations("receiptStatus");
@@ -140,6 +147,40 @@ export async function CustomerHistory({ tickets, receipts, reservations }: Custo
                     )}
                 </CardContent>
             </Card>
+
+            {orders.length > 0 && (
+                <Card>
+                    <CardHeader>
+                        <CardTitle>{t("orders")}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <ul className="divide-y">
+                            {orders.map((order) => {
+                                const { year, month, day } = parseDateKey(order.expectedAt);
+                                const dateLabel = new Date(year, month - 1, day).toLocaleDateString(
+                                    locale,
+                                );
+
+                                return (
+                                    <li key={order.id}>
+                                        <Link
+                                            href={`/orders?id=${order.id}`}
+                                            className="flex items-center justify-between gap-2 py-2.5 text-sm"
+                                        >
+                                            <span className="min-w-0 truncate font-medium">
+                                                {order.name}
+                                            </span>
+                                            <span className="shrink-0 text-muted-foreground">
+                                                {dateLabel}
+                                            </span>
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </CardContent>
+                </Card>
+            )}
         </div>
     );
 }

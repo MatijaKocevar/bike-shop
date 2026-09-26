@@ -270,6 +270,7 @@ export type TicketWhereInput = {
   receipt?: Prisma.XOR<Prisma.ReceiptNullableScalarRelationFilter, Prisma.ReceiptWhereInput> | null
   items?: Prisma.TicketItemListRelationFilter
   reservations?: Prisma.ReservationListRelationFilter
+  images?: Prisma.TicketImageListRelationFilter
 }
 
 export type TicketOrderByWithRelationInput = {
@@ -290,6 +291,7 @@ export type TicketOrderByWithRelationInput = {
   receipt?: Prisma.ReceiptOrderByWithRelationInput
   items?: Prisma.TicketItemOrderByRelationAggregateInput
   reservations?: Prisma.ReservationOrderByRelationAggregateInput
+  images?: Prisma.TicketImageOrderByRelationAggregateInput
 }
 
 export type TicketWhereUniqueInput = Prisma.AtLeast<{
@@ -313,6 +315,7 @@ export type TicketWhereUniqueInput = Prisma.AtLeast<{
   receipt?: Prisma.XOR<Prisma.ReceiptNullableScalarRelationFilter, Prisma.ReceiptWhereInput> | null
   items?: Prisma.TicketItemListRelationFilter
   reservations?: Prisma.ReservationListRelationFilter
+  images?: Prisma.TicketImageListRelationFilter
 }, "id" | "number" | "receiptId">
 
 export type TicketOrderByWithAggregationInput = {
@@ -365,6 +368,7 @@ export type TicketCreateInput = {
   receipt?: Prisma.ReceiptCreateNestedOneWithoutTicketInput
   items?: Prisma.TicketItemCreateNestedManyWithoutTicketInput
   reservations?: Prisma.ReservationCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageCreateNestedManyWithoutTicketInput
 }
 
 export type TicketUncheckedCreateInput = {
@@ -381,6 +385,7 @@ export type TicketUncheckedCreateInput = {
   receiptId?: string | null
   items?: Prisma.TicketItemUncheckedCreateNestedManyWithoutTicketInput
   reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageUncheckedCreateNestedManyWithoutTicketInput
 }
 
 export type TicketUpdateInput = {
@@ -396,6 +401,7 @@ export type TicketUpdateInput = {
   receipt?: Prisma.ReceiptUpdateOneWithoutTicketNestedInput
   items?: Prisma.TicketItemUpdateManyWithoutTicketNestedInput
   reservations?: Prisma.ReservationUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateInput = {
@@ -412,6 +418,7 @@ export type TicketUncheckedUpdateInput = {
   receiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   items?: Prisma.TicketItemUncheckedUpdateManyWithoutTicketNestedInput
   reservations?: Prisma.ReservationUncheckedUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketCreateManyInput = {
@@ -651,6 +658,20 @@ export type EnumTicketStatusFieldUpdateOperationsInput = {
   set?: $Enums.TicketStatus
 }
 
+export type TicketCreateNestedOneWithoutImagesInput = {
+  create?: Prisma.XOR<Prisma.TicketCreateWithoutImagesInput, Prisma.TicketUncheckedCreateWithoutImagesInput>
+  connectOrCreate?: Prisma.TicketCreateOrConnectWithoutImagesInput
+  connect?: Prisma.TicketWhereUniqueInput
+}
+
+export type TicketUpdateOneRequiredWithoutImagesNestedInput = {
+  create?: Prisma.XOR<Prisma.TicketCreateWithoutImagesInput, Prisma.TicketUncheckedCreateWithoutImagesInput>
+  connectOrCreate?: Prisma.TicketCreateOrConnectWithoutImagesInput
+  upsert?: Prisma.TicketUpsertWithoutImagesInput
+  connect?: Prisma.TicketWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TicketUpdateToOneWithWhereWithoutImagesInput, Prisma.TicketUpdateWithoutImagesInput>, Prisma.TicketUncheckedUpdateWithoutImagesInput>
+}
+
 export type TicketCreateNestedOneWithoutItemsInput = {
   create?: Prisma.XOR<Prisma.TicketCreateWithoutItemsInput, Prisma.TicketUncheckedCreateWithoutItemsInput>
   connectOrCreate?: Prisma.TicketCreateOrConnectWithoutItemsInput
@@ -726,6 +747,7 @@ export type TicketCreateWithoutCreatedByInput = {
   receipt?: Prisma.ReceiptCreateNestedOneWithoutTicketInput
   items?: Prisma.TicketItemCreateNestedManyWithoutTicketInput
   reservations?: Prisma.ReservationCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageCreateNestedManyWithoutTicketInput
 }
 
 export type TicketUncheckedCreateWithoutCreatedByInput = {
@@ -741,6 +763,7 @@ export type TicketUncheckedCreateWithoutCreatedByInput = {
   receiptId?: string | null
   items?: Prisma.TicketItemUncheckedCreateNestedManyWithoutTicketInput
   reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageUncheckedCreateNestedManyWithoutTicketInput
 }
 
 export type TicketCreateOrConnectWithoutCreatedByInput = {
@@ -799,6 +822,7 @@ export type TicketCreateWithoutCustomerInput = {
   receipt?: Prisma.ReceiptCreateNestedOneWithoutTicketInput
   items?: Prisma.TicketItemCreateNestedManyWithoutTicketInput
   reservations?: Prisma.ReservationCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageCreateNestedManyWithoutTicketInput
 }
 
 export type TicketUncheckedCreateWithoutCustomerInput = {
@@ -814,6 +838,7 @@ export type TicketUncheckedCreateWithoutCustomerInput = {
   receiptId?: string | null
   items?: Prisma.TicketItemUncheckedCreateNestedManyWithoutTicketInput
   reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageUncheckedCreateNestedManyWithoutTicketInput
 }
 
 export type TicketCreateOrConnectWithoutCustomerInput = {
@@ -855,6 +880,7 @@ export type TicketCreateWithoutBikeInput = {
   receipt?: Prisma.ReceiptCreateNestedOneWithoutTicketInput
   items?: Prisma.TicketItemCreateNestedManyWithoutTicketInput
   reservations?: Prisma.ReservationCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageCreateNestedManyWithoutTicketInput
 }
 
 export type TicketUncheckedCreateWithoutBikeInput = {
@@ -870,6 +896,7 @@ export type TicketUncheckedCreateWithoutBikeInput = {
   receiptId?: string | null
   items?: Prisma.TicketItemUncheckedCreateNestedManyWithoutTicketInput
   reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageUncheckedCreateNestedManyWithoutTicketInput
 }
 
 export type TicketCreateOrConnectWithoutBikeInput = {
@@ -898,6 +925,85 @@ export type TicketUpdateManyWithWhereWithoutBikeInput = {
   data: Prisma.XOR<Prisma.TicketUpdateManyMutationInput, Prisma.TicketUncheckedUpdateManyWithoutBikeInput>
 }
 
+export type TicketCreateWithoutImagesInput = {
+  id?: string
+  number?: number
+  status?: $Enums.TicketStatus
+  intakeNote?: string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  customer?: Prisma.CustomerCreateNestedOneWithoutTicketsInput
+  bike?: Prisma.BikeCreateNestedOneWithoutTicketsInput
+  createdBy?: Prisma.UserCreateNestedOneWithoutTicketsInput
+  receipt?: Prisma.ReceiptCreateNestedOneWithoutTicketInput
+  items?: Prisma.TicketItemCreateNestedManyWithoutTicketInput
+  reservations?: Prisma.ReservationCreateNestedManyWithoutTicketInput
+}
+
+export type TicketUncheckedCreateWithoutImagesInput = {
+  id?: string
+  number?: number
+  status?: $Enums.TicketStatus
+  intakeNote?: string | null
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  customerId?: string | null
+  bikeId?: string | null
+  createdById?: string | null
+  receiptId?: string | null
+  items?: Prisma.TicketItemUncheckedCreateNestedManyWithoutTicketInput
+  reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutTicketInput
+}
+
+export type TicketCreateOrConnectWithoutImagesInput = {
+  where: Prisma.TicketWhereUniqueInput
+  create: Prisma.XOR<Prisma.TicketCreateWithoutImagesInput, Prisma.TicketUncheckedCreateWithoutImagesInput>
+}
+
+export type TicketUpsertWithoutImagesInput = {
+  update: Prisma.XOR<Prisma.TicketUpdateWithoutImagesInput, Prisma.TicketUncheckedUpdateWithoutImagesInput>
+  create: Prisma.XOR<Prisma.TicketCreateWithoutImagesInput, Prisma.TicketUncheckedCreateWithoutImagesInput>
+  where?: Prisma.TicketWhereInput
+}
+
+export type TicketUpdateToOneWithWhereWithoutImagesInput = {
+  where?: Prisma.TicketWhereInput
+  data: Prisma.XOR<Prisma.TicketUpdateWithoutImagesInput, Prisma.TicketUncheckedUpdateWithoutImagesInput>
+}
+
+export type TicketUpdateWithoutImagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+  intakeNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customer?: Prisma.CustomerUpdateOneWithoutTicketsNestedInput
+  bike?: Prisma.BikeUpdateOneWithoutTicketsNestedInput
+  createdBy?: Prisma.UserUpdateOneWithoutTicketsNestedInput
+  receipt?: Prisma.ReceiptUpdateOneWithoutTicketNestedInput
+  items?: Prisma.TicketItemUpdateManyWithoutTicketNestedInput
+  reservations?: Prisma.ReservationUpdateManyWithoutTicketNestedInput
+}
+
+export type TicketUncheckedUpdateWithoutImagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+  intakeNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  customerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bikeId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  receiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  items?: Prisma.TicketItemUncheckedUpdateManyWithoutTicketNestedInput
+  reservations?: Prisma.ReservationUncheckedUpdateManyWithoutTicketNestedInput
+}
+
 export type TicketCreateWithoutItemsInput = {
   id?: string
   number?: number
@@ -911,6 +1017,7 @@ export type TicketCreateWithoutItemsInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutTicketsInput
   receipt?: Prisma.ReceiptCreateNestedOneWithoutTicketInput
   reservations?: Prisma.ReservationCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageCreateNestedManyWithoutTicketInput
 }
 
 export type TicketUncheckedCreateWithoutItemsInput = {
@@ -926,6 +1033,7 @@ export type TicketUncheckedCreateWithoutItemsInput = {
   createdById?: string | null
   receiptId?: string | null
   reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageUncheckedCreateNestedManyWithoutTicketInput
 }
 
 export type TicketCreateOrConnectWithoutItemsInput = {
@@ -956,6 +1064,7 @@ export type TicketUpdateWithoutItemsInput = {
   createdBy?: Prisma.UserUpdateOneWithoutTicketsNestedInput
   receipt?: Prisma.ReceiptUpdateOneWithoutTicketNestedInput
   reservations?: Prisma.ReservationUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateWithoutItemsInput = {
@@ -971,6 +1080,7 @@ export type TicketUncheckedUpdateWithoutItemsInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   receiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reservations?: Prisma.ReservationUncheckedUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketCreateWithoutReceiptInput = {
@@ -986,6 +1096,7 @@ export type TicketCreateWithoutReceiptInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutTicketsInput
   items?: Prisma.TicketItemCreateNestedManyWithoutTicketInput
   reservations?: Prisma.ReservationCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageCreateNestedManyWithoutTicketInput
 }
 
 export type TicketUncheckedCreateWithoutReceiptInput = {
@@ -1001,6 +1112,7 @@ export type TicketUncheckedCreateWithoutReceiptInput = {
   createdById?: string | null
   items?: Prisma.TicketItemUncheckedCreateNestedManyWithoutTicketInput
   reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageUncheckedCreateNestedManyWithoutTicketInput
 }
 
 export type TicketCreateOrConnectWithoutReceiptInput = {
@@ -1031,6 +1143,7 @@ export type TicketUpdateWithoutReceiptInput = {
   createdBy?: Prisma.UserUpdateOneWithoutTicketsNestedInput
   items?: Prisma.TicketItemUpdateManyWithoutTicketNestedInput
   reservations?: Prisma.ReservationUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateWithoutReceiptInput = {
@@ -1046,6 +1159,7 @@ export type TicketUncheckedUpdateWithoutReceiptInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   items?: Prisma.TicketItemUncheckedUpdateManyWithoutTicketNestedInput
   reservations?: Prisma.ReservationUncheckedUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketCreateWithoutReservationsInput = {
@@ -1061,6 +1175,7 @@ export type TicketCreateWithoutReservationsInput = {
   createdBy?: Prisma.UserCreateNestedOneWithoutTicketsInput
   receipt?: Prisma.ReceiptCreateNestedOneWithoutTicketInput
   items?: Prisma.TicketItemCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageCreateNestedManyWithoutTicketInput
 }
 
 export type TicketUncheckedCreateWithoutReservationsInput = {
@@ -1076,6 +1191,7 @@ export type TicketUncheckedCreateWithoutReservationsInput = {
   createdById?: string | null
   receiptId?: string | null
   items?: Prisma.TicketItemUncheckedCreateNestedManyWithoutTicketInput
+  images?: Prisma.TicketImageUncheckedCreateNestedManyWithoutTicketInput
 }
 
 export type TicketCreateOrConnectWithoutReservationsInput = {
@@ -1106,6 +1222,7 @@ export type TicketUpdateWithoutReservationsInput = {
   createdBy?: Prisma.UserUpdateOneWithoutTicketsNestedInput
   receipt?: Prisma.ReceiptUpdateOneWithoutTicketNestedInput
   items?: Prisma.TicketItemUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateWithoutReservationsInput = {
@@ -1121,6 +1238,7 @@ export type TicketUncheckedUpdateWithoutReservationsInput = {
   createdById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   receiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   items?: Prisma.TicketItemUncheckedUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketCreateManyCreatedByInput = {
@@ -1148,6 +1266,7 @@ export type TicketUpdateWithoutCreatedByInput = {
   receipt?: Prisma.ReceiptUpdateOneWithoutTicketNestedInput
   items?: Prisma.TicketItemUpdateManyWithoutTicketNestedInput
   reservations?: Prisma.ReservationUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateWithoutCreatedByInput = {
@@ -1163,6 +1282,7 @@ export type TicketUncheckedUpdateWithoutCreatedByInput = {
   receiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   items?: Prisma.TicketItemUncheckedUpdateManyWithoutTicketNestedInput
   reservations?: Prisma.ReservationUncheckedUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1203,6 +1323,7 @@ export type TicketUpdateWithoutCustomerInput = {
   receipt?: Prisma.ReceiptUpdateOneWithoutTicketNestedInput
   items?: Prisma.TicketItemUpdateManyWithoutTicketNestedInput
   reservations?: Prisma.ReservationUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateWithoutCustomerInput = {
@@ -1218,6 +1339,7 @@ export type TicketUncheckedUpdateWithoutCustomerInput = {
   receiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   items?: Prisma.TicketItemUncheckedUpdateManyWithoutTicketNestedInput
   reservations?: Prisma.ReservationUncheckedUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateManyWithoutCustomerInput = {
@@ -1258,6 +1380,7 @@ export type TicketUpdateWithoutBikeInput = {
   receipt?: Prisma.ReceiptUpdateOneWithoutTicketNestedInput
   items?: Prisma.TicketItemUpdateManyWithoutTicketNestedInput
   reservations?: Prisma.ReservationUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateWithoutBikeInput = {
@@ -1273,6 +1396,7 @@ export type TicketUncheckedUpdateWithoutBikeInput = {
   receiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   items?: Prisma.TicketItemUncheckedUpdateManyWithoutTicketNestedInput
   reservations?: Prisma.ReservationUncheckedUpdateManyWithoutTicketNestedInput
+  images?: Prisma.TicketImageUncheckedUpdateManyWithoutTicketNestedInput
 }
 
 export type TicketUncheckedUpdateManyWithoutBikeInput = {
@@ -1296,11 +1420,13 @@ export type TicketUncheckedUpdateManyWithoutBikeInput = {
 export type TicketCountOutputType = {
   items: number
   reservations: number
+  images: number
 }
 
 export type TicketCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   items?: boolean | TicketCountOutputTypeCountItemsArgs
   reservations?: boolean | TicketCountOutputTypeCountReservationsArgs
+  images?: boolean | TicketCountOutputTypeCountImagesArgs
 }
 
 /**
@@ -1327,6 +1453,13 @@ export type TicketCountOutputTypeCountReservationsArgs<ExtArgs extends runtime.T
   where?: Prisma.ReservationWhereInput
 }
 
+/**
+ * TicketCountOutputType without action
+ */
+export type TicketCountOutputTypeCountImagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TicketImageWhereInput
+}
+
 
 export type TicketSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1346,6 +1479,7 @@ export type TicketSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   receipt?: boolean | Prisma.Ticket$receiptArgs<ExtArgs>
   items?: boolean | Prisma.Ticket$itemsArgs<ExtArgs>
   reservations?: boolean | Prisma.Ticket$reservationsArgs<ExtArgs>
+  images?: boolean | Prisma.Ticket$imagesArgs<ExtArgs>
   _count?: boolean | Prisma.TicketCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ticket"]>
 
@@ -1407,6 +1541,7 @@ export type TicketInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   receipt?: boolean | Prisma.Ticket$receiptArgs<ExtArgs>
   items?: boolean | Prisma.Ticket$itemsArgs<ExtArgs>
   reservations?: boolean | Prisma.Ticket$reservationsArgs<ExtArgs>
+  images?: boolean | Prisma.Ticket$imagesArgs<ExtArgs>
   _count?: boolean | Prisma.TicketCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TicketIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1431,6 +1566,7 @@ export type $TicketPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     receipt: Prisma.$ReceiptPayload<ExtArgs> | null
     items: Prisma.$TicketItemPayload<ExtArgs>[]
     reservations: Prisma.$ReservationPayload<ExtArgs>[]
+    images: Prisma.$TicketImagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1844,6 +1980,7 @@ export interface Prisma__TicketClient<T, Null = never, ExtArgs extends runtime.T
   receipt<T extends Prisma.Ticket$receiptArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ticket$receiptArgs<ExtArgs>>): Prisma.Prisma__ReceiptClient<runtime.Types.Result.GetResult<Prisma.$ReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   items<T extends Prisma.Ticket$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ticket$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reservations<T extends Prisma.Ticket$reservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ticket$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  images<T extends Prisma.Ticket$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Ticket$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2406,6 +2543,30 @@ export type Ticket$reservationsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.ReservationScalarFieldEnum | Prisma.ReservationScalarFieldEnum[]
+}
+
+/**
+ * Ticket.images
+ */
+export type Ticket$imagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TicketImage
+   */
+  select?: Prisma.TicketImageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TicketImage
+   */
+  omit?: Prisma.TicketImageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TicketImageInclude<ExtArgs> | null
+  where?: Prisma.TicketImageWhereInput
+  orderBy?: Prisma.TicketImageOrderByWithRelationInput | Prisma.TicketImageOrderByWithRelationInput[]
+  cursor?: Prisma.TicketImageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TicketImageScalarFieldEnum | Prisma.TicketImageScalarFieldEnum[]
 }
 
 /**

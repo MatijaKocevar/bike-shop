@@ -133,6 +133,7 @@ export default async function CustomersPage({ searchParams }: CustomersPageProps
                                 tickets={editing.tickets}
                                 receipts={editing.receipts}
                                 reservations={editing.reservations}
+                                orders={editing.orders}
                             />
                         </div>
                     )

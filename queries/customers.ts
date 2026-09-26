@@ -65,6 +65,10 @@ export async function getCustomerById(id: string): Promise<CustomerDetail | null
                 orderBy: [{ date: "desc" }, { startMinutes: "desc" }],
                 take: 20,
             },
+            orders: {
+                select: { id: true, name: true, expectedAt: true },
+                orderBy: { expectedAt: "asc" },
+            },
         },
     });
 
@@ -105,6 +109,11 @@ export async function getCustomerById(id: string): Promise<CustomerDetail | null
             startMinutes: reservation.startMinutes,
             durationMinutes: reservation.durationMinutes,
             note: reservation.note,
+        })),
+        orders: customer.orders.map((order) => ({
+            id: order.id,
+            name: order.name,
+            expectedAt: order.expectedAt,
         })),
     };
 }

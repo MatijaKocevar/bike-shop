@@ -29,6 +29,7 @@
             "dashboard": "Nadzorna plošča",
             "calendar": "Koledar",
             "tickets": "Delovni nalogi",
+            "orders": "Naročila",
             "products": "Izdelki",
             "receipts": "Računi",
             "customers": "Kupci",
@@ -125,6 +126,11 @@
         "newBikeHint": "Novo kolo bo dodano izbrani stranki.",
         "bikeNamePlaceholder": "Ime kolesa (npr. Trek Marlin 7)",
         "bikeColorPlaceholder": "Barva",
+        "photos": "Fotografije",
+        "addPhoto": "Dodaj fotografijo",
+        "noPhotos": "Ni še fotografij. Fotografirajte ali priložite datoteko.",
+        "photoDescription": "Opis",
+        "removePhoto": "Odstrani fotografijo",
         "count": "{count, plural, one {# nalog} two {# naloga} few {# nalogi} other {# nalogov}}"
     },
     "ticketStatus": {
@@ -157,9 +163,27 @@
         "noReceipts": "Ni še računov.",
         "reservations": "Rezervacije",
         "noReservations": "Ni še rezervacij.",
+        "orders": "Naročila",
         "deleteCustomer": "Izbriši kupca",
         "actions": "Dejanja",
         "count": "{count, plural, one {# kupec} two {# kupca} few {# kupci} other {# kupcev}}"
+    },
+    "orders": {
+        "new": "Novo naročilo",
+        "newTitle": "Novo naročilo",
+        "edit": "Uredi naročilo",
+        "customer": "Stranka",
+        "noCustomer": "Brez stranke",
+        "name": "Naročilo",
+        "namePlaceholder": "npr. Shimano Deore zavorne ploščice",
+        "expectedAt": "Pričakovano",
+        "note": "Opomba",
+        "notePlaceholder": "Neobvezna opomba",
+        "overdue": "Zamuja",
+        "actions": "Dejanja",
+        "deleteOrder": "Izbriši naročilo",
+        "createOrder": "Ustvari naročilo",
+        "count": "{count, plural, one {# naročilo} two {# naročili} few {# naročila} other {# naročil}}"
     },
     "products": {
         "title": "Izdelki",

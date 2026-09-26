@@ -29,6 +29,7 @@
             "dashboard": "Dashboard",
             "calendar": "Calendar",
             "tickets": "Work tickets",
+            "orders": "Orders",
             "products": "Products",
             "receipts": "Receipts",
             "customers": "Customers",
@@ -125,6 +126,11 @@
         "newBikeHint": "A new bike will be added for the selected customer.",
         "bikeNamePlaceholder": "Bike name (e.g. Trek Marlin 7)",
         "bikeColorPlaceholder": "Color",
+        "photos": "Photos",
+        "addPhoto": "Add photo",
+        "noPhotos": "No photos yet. Take a photo or attach one.",
+        "photoDescription": "Description",
+        "removePhoto": "Remove photo",
         "count": "{count, plural, one {# ticket} other {# tickets}}"
     },
     "ticketStatus": {
@@ -157,9 +163,27 @@
         "noReceipts": "No receipts yet.",
         "reservations": "Reservations",
         "noReservations": "No reservations yet.",
+        "orders": "Orders",
         "deleteCustomer": "Delete customer",
         "actions": "Actions",
         "count": "{count, plural, one {# customer} other {# customers}}"
+    },
+    "orders": {
+        "new": "New order",
+        "newTitle": "New order",
+        "edit": "Edit order",
+        "customer": "Customer",
+        "noCustomer": "No customer",
+        "name": "Order",
+        "namePlaceholder": "e.g. Shimano Deore brake pads",
+        "expectedAt": "Expected",
+        "note": "Note",
+        "notePlaceholder": "Optional note",
+        "overdue": "Overdue",
+        "actions": "Actions",
+        "deleteOrder": "Delete order",
+        "createOrder": "Create order",
+        "count": "{count, plural, one {# order} other {# orders}}"
     },
     "products": {
         "title": "Products",
