@@ -20,6 +20,12 @@ export type TicketDetailItem = {
     productId: string | null;
 };
 
+export type TicketImageSummary = {
+    id: string;
+    key: string;
+    description: string | null;
+};
+
 export type TicketDetail = {
     id: string;
     number: number;
@@ -34,5 +40,6 @@ export type TicketDetail = {
     bikeName: string | null;
     receipt: { id: string; number: number } | null;
     items: TicketDetailItem[];
+    images: TicketImageSummary[];
     total: number;
 };

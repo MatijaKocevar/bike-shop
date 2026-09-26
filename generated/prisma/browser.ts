@@ -68,6 +68,11 @@ export type ProductImage = Prisma.ProductImageModel
  */
 export type Ticket = Prisma.TicketModel
 /**
+ * Model TicketImage
+ * 
+ */
+export type TicketImage = Prisma.TicketImageModel
+/**
  * Model TicketItem
  * 
  */
@@ -87,6 +92,11 @@ export type ReceiptItem = Prisma.ReceiptItemModel
  * 
  */
 export type Reservation = Prisma.ReservationModel
+/**
+ * Model Order
+ * 
+ */
+export type Order = Prisma.OrderModel
 /**
  * Model Setting
  * 

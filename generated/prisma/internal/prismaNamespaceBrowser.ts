@@ -61,10 +61,12 @@ export const ModelName = {
   Product: 'Product',
   ProductImage: 'ProductImage',
   Ticket: 'Ticket',
+  TicketImage: 'TicketImage',
   TicketItem: 'TicketItem',
   Receipt: 'Receipt',
   ReceiptItem: 'ReceiptItem',
   Reservation: 'Reservation',
+  Order: 'Order',
   Setting: 'Setting'
 } as const
 
@@ -220,6 +222,18 @@ export const TicketScalarFieldEnum = {
 export type TicketScalarFieldEnum = (typeof TicketScalarFieldEnum)[keyof typeof TicketScalarFieldEnum]
 
 
+export const TicketImageScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  description: 'description',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  ticketId: 'ticketId'
+} as const
+
+export type TicketImageScalarFieldEnum = (typeof TicketImageScalarFieldEnum)[keyof typeof TicketImageScalarFieldEnum]
+
+
 export const TicketItemScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -288,6 +302,21 @@ export const ReservationScalarFieldEnum = {
 } as const
 
 export type ReservationScalarFieldEnum = (typeof ReservationScalarFieldEnum)[keyof typeof ReservationScalarFieldEnum]
+
+
+export const OrderScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  expectedAt: 'expectedAt',
+  note: 'note',
+  customerName: 'customerName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  customerId: 'customerId',
+  createdById: 'createdById'
+} as const
+
+export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
 
 
 export const SettingScalarFieldEnum = {

@@ -35,6 +35,7 @@ export async function getTicketById(id: string): Promise<TicketDetail | null> {
             bike: { select: { id: true, name: true } },
             receipt: { select: { id: true, number: true } },
             items: { orderBy: { sortOrder: "asc" } },
+            images: { orderBy: { sortOrder: "asc" } },
         },
     });
 
@@ -60,6 +61,11 @@ export async function getTicketById(id: string): Promise<TicketDetail | null> {
             unitPrice: Number(item.unitPrice),
             done: item.done,
             productId: item.productId,
+        })),
+        images: ticket.images.map((image) => ({
+            id: image.id,
+            key: image.key,
+            description: image.description,
         })),
         total: round2(
             ticket.items.reduce((sum, item) => sum + item.quantity * Number(item.unitPrice), 0),

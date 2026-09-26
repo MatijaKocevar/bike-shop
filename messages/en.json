@@ -125,6 +125,11 @@
         "newBikeHint": "A new bike will be added for the selected customer.",
         "bikeNamePlaceholder": "Bike name (e.g. Trek Marlin 7)",
         "bikeColorPlaceholder": "Color",
+        "photos": "Photos",
+        "addPhoto": "Add photo",
+        "noPhotos": "No photos yet. Take a photo or attach one.",
+        "photoDescription": "Description",
+        "removePhoto": "Remove photo",
         "count": "{count, plural, one {# ticket} other {# tickets}}"
     },
     "ticketStatus": {

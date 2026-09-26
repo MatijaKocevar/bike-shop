@@ -34,6 +34,7 @@ type TicketFormProps = {
     defaultDate?: string;
     reservations?: ReservationListItem[];
     actions?: React.ReactNode;
+    photos?: React.ReactNode;
 };
 
 type TicketFormState = {
@@ -120,6 +121,7 @@ export function TicketForm({
     defaultDate,
     reservations = [],
     actions,
+    photos,
 }: TicketFormProps) {
     const t = useTranslations("tickets");
     const tCalendar = useTranslations("calendar");
@@ -649,6 +651,8 @@ export function TicketForm({
                     )}
                 </div>
             </fieldset>
+
+            {photos && <div className="shrink-0">{photos}</div>}
 
             <div className="flex shrink-0 items-center justify-between gap-2 border-t pt-4">
                 <div className="flex min-w-0 items-center gap-3">

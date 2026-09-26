@@ -202,6 +202,7 @@ export type CustomerWhereInput = {
   tickets?: Prisma.TicketListRelationFilter
   receipts?: Prisma.ReceiptListRelationFilter
   reservations?: Prisma.ReservationListRelationFilter
+  orders?: Prisma.OrderListRelationFilter
 }
 
 export type CustomerOrderByWithRelationInput = {
@@ -216,6 +217,7 @@ export type CustomerOrderByWithRelationInput = {
   tickets?: Prisma.TicketOrderByRelationAggregateInput
   receipts?: Prisma.ReceiptOrderByRelationAggregateInput
   reservations?: Prisma.ReservationOrderByRelationAggregateInput
+  orders?: Prisma.OrderOrderByRelationAggregateInput
 }
 
 export type CustomerWhereUniqueInput = Prisma.AtLeast<{
@@ -233,6 +235,7 @@ export type CustomerWhereUniqueInput = Prisma.AtLeast<{
   tickets?: Prisma.TicketListRelationFilter
   receipts?: Prisma.ReceiptListRelationFilter
   reservations?: Prisma.ReservationListRelationFilter
+  orders?: Prisma.OrderListRelationFilter
 }, "id">
 
 export type CustomerOrderByWithAggregationInput = {
@@ -273,6 +276,7 @@ export type CustomerCreateInput = {
   tickets?: Prisma.TicketCreateNestedManyWithoutCustomerInput
   receipts?: Prisma.ReceiptCreateNestedManyWithoutCustomerInput
   reservations?: Prisma.ReservationCreateNestedManyWithoutCustomerInput
+  orders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateInput = {
@@ -287,6 +291,7 @@ export type CustomerUncheckedCreateInput = {
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCustomerInput
   receipts?: Prisma.ReceiptUncheckedCreateNestedManyWithoutCustomerInput
   reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutCustomerInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUpdateInput = {
@@ -301,6 +306,7 @@ export type CustomerUpdateInput = {
   tickets?: Prisma.TicketUpdateManyWithoutCustomerNestedInput
   receipts?: Prisma.ReceiptUpdateManyWithoutCustomerNestedInput
   reservations?: Prisma.ReservationUpdateManyWithoutCustomerNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateInput = {
@@ -315,6 +321,7 @@ export type CustomerUncheckedUpdateInput = {
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutCustomerNestedInput
   receipts?: Prisma.ReceiptUncheckedUpdateManyWithoutCustomerNestedInput
   reservations?: Prisma.ReservationUncheckedUpdateManyWithoutCustomerNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateManyInput = {
@@ -449,6 +456,22 @@ export type CustomerUpdateOneWithoutReservationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutReservationsInput, Prisma.CustomerUpdateWithoutReservationsInput>, Prisma.CustomerUncheckedUpdateWithoutReservationsInput>
 }
 
+export type CustomerCreateNestedOneWithoutOrdersInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutOrdersInput, Prisma.CustomerUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutOrdersInput
+  connect?: Prisma.CustomerWhereUniqueInput
+}
+
+export type CustomerUpdateOneWithoutOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.CustomerCreateWithoutOrdersInput, Prisma.CustomerUncheckedCreateWithoutOrdersInput>
+  connectOrCreate?: Prisma.CustomerCreateOrConnectWithoutOrdersInput
+  upsert?: Prisma.CustomerUpsertWithoutOrdersInput
+  disconnect?: Prisma.CustomerWhereInput | boolean
+  delete?: Prisma.CustomerWhereInput | boolean
+  connect?: Prisma.CustomerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CustomerUpdateToOneWithWhereWithoutOrdersInput, Prisma.CustomerUpdateWithoutOrdersInput>, Prisma.CustomerUncheckedUpdateWithoutOrdersInput>
+}
+
 export type CustomerCreateWithoutBikesInput = {
   id?: string
   name: string
@@ -460,6 +483,7 @@ export type CustomerCreateWithoutBikesInput = {
   tickets?: Prisma.TicketCreateNestedManyWithoutCustomerInput
   receipts?: Prisma.ReceiptCreateNestedManyWithoutCustomerInput
   reservations?: Prisma.ReservationCreateNestedManyWithoutCustomerInput
+  orders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutBikesInput = {
@@ -473,6 +497,7 @@ export type CustomerUncheckedCreateWithoutBikesInput = {
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCustomerInput
   receipts?: Prisma.ReceiptUncheckedCreateNestedManyWithoutCustomerInput
   reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutCustomerInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutBikesInput = {
@@ -502,6 +527,7 @@ export type CustomerUpdateWithoutBikesInput = {
   tickets?: Prisma.TicketUpdateManyWithoutCustomerNestedInput
   receipts?: Prisma.ReceiptUpdateManyWithoutCustomerNestedInput
   reservations?: Prisma.ReservationUpdateManyWithoutCustomerNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutBikesInput = {
@@ -515,6 +541,7 @@ export type CustomerUncheckedUpdateWithoutBikesInput = {
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutCustomerNestedInput
   receipts?: Prisma.ReceiptUncheckedUpdateManyWithoutCustomerNestedInput
   reservations?: Prisma.ReservationUncheckedUpdateManyWithoutCustomerNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutTicketsInput = {
@@ -528,6 +555,7 @@ export type CustomerCreateWithoutTicketsInput = {
   bikes?: Prisma.BikeCreateNestedManyWithoutCustomerInput
   receipts?: Prisma.ReceiptCreateNestedManyWithoutCustomerInput
   reservations?: Prisma.ReservationCreateNestedManyWithoutCustomerInput
+  orders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutTicketsInput = {
@@ -541,6 +569,7 @@ export type CustomerUncheckedCreateWithoutTicketsInput = {
   bikes?: Prisma.BikeUncheckedCreateNestedManyWithoutCustomerInput
   receipts?: Prisma.ReceiptUncheckedCreateNestedManyWithoutCustomerInput
   reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutCustomerInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutTicketsInput = {
@@ -570,6 +599,7 @@ export type CustomerUpdateWithoutTicketsInput = {
   bikes?: Prisma.BikeUpdateManyWithoutCustomerNestedInput
   receipts?: Prisma.ReceiptUpdateManyWithoutCustomerNestedInput
   reservations?: Prisma.ReservationUpdateManyWithoutCustomerNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutTicketsInput = {
@@ -583,6 +613,7 @@ export type CustomerUncheckedUpdateWithoutTicketsInput = {
   bikes?: Prisma.BikeUncheckedUpdateManyWithoutCustomerNestedInput
   receipts?: Prisma.ReceiptUncheckedUpdateManyWithoutCustomerNestedInput
   reservations?: Prisma.ReservationUncheckedUpdateManyWithoutCustomerNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutReceiptsInput = {
@@ -596,6 +627,7 @@ export type CustomerCreateWithoutReceiptsInput = {
   bikes?: Prisma.BikeCreateNestedManyWithoutCustomerInput
   tickets?: Prisma.TicketCreateNestedManyWithoutCustomerInput
   reservations?: Prisma.ReservationCreateNestedManyWithoutCustomerInput
+  orders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutReceiptsInput = {
@@ -609,6 +641,7 @@ export type CustomerUncheckedCreateWithoutReceiptsInput = {
   bikes?: Prisma.BikeUncheckedCreateNestedManyWithoutCustomerInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCustomerInput
   reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutCustomerInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutReceiptsInput = {
@@ -638,6 +671,7 @@ export type CustomerUpdateWithoutReceiptsInput = {
   bikes?: Prisma.BikeUpdateManyWithoutCustomerNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutCustomerNestedInput
   reservations?: Prisma.ReservationUpdateManyWithoutCustomerNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutReceiptsInput = {
@@ -651,6 +685,7 @@ export type CustomerUncheckedUpdateWithoutReceiptsInput = {
   bikes?: Prisma.BikeUncheckedUpdateManyWithoutCustomerNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutCustomerNestedInput
   reservations?: Prisma.ReservationUncheckedUpdateManyWithoutCustomerNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerCreateWithoutReservationsInput = {
@@ -664,6 +699,7 @@ export type CustomerCreateWithoutReservationsInput = {
   bikes?: Prisma.BikeCreateNestedManyWithoutCustomerInput
   tickets?: Prisma.TicketCreateNestedManyWithoutCustomerInput
   receipts?: Prisma.ReceiptCreateNestedManyWithoutCustomerInput
+  orders?: Prisma.OrderCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerUncheckedCreateWithoutReservationsInput = {
@@ -677,6 +713,7 @@ export type CustomerUncheckedCreateWithoutReservationsInput = {
   bikes?: Prisma.BikeUncheckedCreateNestedManyWithoutCustomerInput
   tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCustomerInput
   receipts?: Prisma.ReceiptUncheckedCreateNestedManyWithoutCustomerInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
 }
 
 export type CustomerCreateOrConnectWithoutReservationsInput = {
@@ -706,6 +743,7 @@ export type CustomerUpdateWithoutReservationsInput = {
   bikes?: Prisma.BikeUpdateManyWithoutCustomerNestedInput
   tickets?: Prisma.TicketUpdateManyWithoutCustomerNestedInput
   receipts?: Prisma.ReceiptUpdateManyWithoutCustomerNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
 }
 
 export type CustomerUncheckedUpdateWithoutReservationsInput = {
@@ -719,6 +757,79 @@ export type CustomerUncheckedUpdateWithoutReservationsInput = {
   bikes?: Prisma.BikeUncheckedUpdateManyWithoutCustomerNestedInput
   tickets?: Prisma.TicketUncheckedUpdateManyWithoutCustomerNestedInput
   receipts?: Prisma.ReceiptUncheckedUpdateManyWithoutCustomerNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerCreateWithoutOrdersInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  email?: string | null
+  note?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bikes?: Prisma.BikeCreateNestedManyWithoutCustomerInput
+  tickets?: Prisma.TicketCreateNestedManyWithoutCustomerInput
+  receipts?: Prisma.ReceiptCreateNestedManyWithoutCustomerInput
+  reservations?: Prisma.ReservationCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerUncheckedCreateWithoutOrdersInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  email?: string | null
+  note?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  bikes?: Prisma.BikeUncheckedCreateNestedManyWithoutCustomerInput
+  tickets?: Prisma.TicketUncheckedCreateNestedManyWithoutCustomerInput
+  receipts?: Prisma.ReceiptUncheckedCreateNestedManyWithoutCustomerInput
+  reservations?: Prisma.ReservationUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+export type CustomerCreateOrConnectWithoutOrdersInput = {
+  where: Prisma.CustomerWhereUniqueInput
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutOrdersInput, Prisma.CustomerUncheckedCreateWithoutOrdersInput>
+}
+
+export type CustomerUpsertWithoutOrdersInput = {
+  update: Prisma.XOR<Prisma.CustomerUpdateWithoutOrdersInput, Prisma.CustomerUncheckedUpdateWithoutOrdersInput>
+  create: Prisma.XOR<Prisma.CustomerCreateWithoutOrdersInput, Prisma.CustomerUncheckedCreateWithoutOrdersInput>
+  where?: Prisma.CustomerWhereInput
+}
+
+export type CustomerUpdateToOneWithWhereWithoutOrdersInput = {
+  where?: Prisma.CustomerWhereInput
+  data: Prisma.XOR<Prisma.CustomerUpdateWithoutOrdersInput, Prisma.CustomerUncheckedUpdateWithoutOrdersInput>
+}
+
+export type CustomerUpdateWithoutOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bikes?: Prisma.BikeUpdateManyWithoutCustomerNestedInput
+  tickets?: Prisma.TicketUpdateManyWithoutCustomerNestedInput
+  receipts?: Prisma.ReceiptUpdateManyWithoutCustomerNestedInput
+  reservations?: Prisma.ReservationUpdateManyWithoutCustomerNestedInput
+}
+
+export type CustomerUncheckedUpdateWithoutOrdersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  bikes?: Prisma.BikeUncheckedUpdateManyWithoutCustomerNestedInput
+  tickets?: Prisma.TicketUncheckedUpdateManyWithoutCustomerNestedInput
+  receipts?: Prisma.ReceiptUncheckedUpdateManyWithoutCustomerNestedInput
+  reservations?: Prisma.ReservationUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 
@@ -731,6 +842,7 @@ export type CustomerCountOutputType = {
   tickets: number
   receipts: number
   reservations: number
+  orders: number
 }
 
 export type CustomerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -738,6 +850,7 @@ export type CustomerCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   tickets?: boolean | CustomerCountOutputTypeCountTicketsArgs
   receipts?: boolean | CustomerCountOutputTypeCountReceiptsArgs
   reservations?: boolean | CustomerCountOutputTypeCountReservationsArgs
+  orders?: boolean | CustomerCountOutputTypeCountOrdersArgs
 }
 
 /**
@@ -778,6 +891,13 @@ export type CustomerCountOutputTypeCountReservationsArgs<ExtArgs extends runtime
   where?: Prisma.ReservationWhereInput
 }
 
+/**
+ * CustomerCountOutputType without action
+ */
+export type CustomerCountOutputTypeCountOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.OrderWhereInput
+}
+
 
 export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -791,6 +911,7 @@ export type CustomerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   tickets?: boolean | Prisma.Customer$ticketsArgs<ExtArgs>
   receipts?: boolean | Prisma.Customer$receiptsArgs<ExtArgs>
   reservations?: boolean | Prisma.Customer$reservationsArgs<ExtArgs>
+  orders?: boolean | Prisma.Customer$ordersArgs<ExtArgs>
   _count?: boolean | Prisma.CustomerCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["customer"]>
 
@@ -830,6 +951,7 @@ export type CustomerInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   tickets?: boolean | Prisma.Customer$ticketsArgs<ExtArgs>
   receipts?: boolean | Prisma.Customer$receiptsArgs<ExtArgs>
   reservations?: boolean | Prisma.Customer$reservationsArgs<ExtArgs>
+  orders?: boolean | Prisma.Customer$ordersArgs<ExtArgs>
   _count?: boolean | Prisma.CustomerCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CustomerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -842,6 +964,7 @@ export type $CustomerPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     tickets: Prisma.$TicketPayload<ExtArgs>[]
     receipts: Prisma.$ReceiptPayload<ExtArgs>[]
     reservations: Prisma.$ReservationPayload<ExtArgs>[]
+    orders: Prisma.$OrderPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1249,6 +1372,7 @@ export interface Prisma__CustomerClient<T, Null = never, ExtArgs extends runtime
   tickets<T extends Prisma.Customer$ticketsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$ticketsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   receipts<T extends Prisma.Customer$receiptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$receiptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReceiptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reservations<T extends Prisma.Customer$reservationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  orders<T extends Prisma.Customer$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Customer$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1771,6 +1895,30 @@ export type Customer$reservationsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.ReservationScalarFieldEnum | Prisma.ReservationScalarFieldEnum[]
+}
+
+/**
+ * Customer.orders
+ */
+export type Customer$ordersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Order
+   */
+  select?: Prisma.OrderSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Order
+   */
+  omit?: Prisma.OrderOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.OrderInclude<ExtArgs> | null
+  where?: Prisma.OrderWhereInput
+  orderBy?: Prisma.OrderOrderByWithRelationInput | Prisma.OrderOrderByWithRelationInput[]
+  cursor?: Prisma.OrderWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
 }
 
 /**

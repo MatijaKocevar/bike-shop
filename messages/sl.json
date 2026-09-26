@@ -125,6 +125,11 @@
         "newBikeHint": "Novo kolo bo dodano izbrani stranki.",
         "bikeNamePlaceholder": "Ime kolesa (npr. Trek Marlin 7)",
         "bikeColorPlaceholder": "Barva",
+        "photos": "Fotografije",
+        "addPhoto": "Dodaj fotografijo",
+        "noPhotos": "Ni še fotografij. Fotografirajte ali priložite datoteko.",
+        "photoDescription": "Opis",
+        "removePhoto": "Odstrani fotografijo",
         "count": "{count, plural, one {# nalog} two {# naloga} few {# nalogi} other {# nalogov}}"
     },
     "ticketStatus": {
