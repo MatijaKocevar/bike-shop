@@ -124,10 +124,7 @@
         "newBike": "New bike",
         "newBikeHint": "A new bike will be added for the selected customer.",
         "bikeNamePlaceholder": "Bike name (e.g. Trek Marlin 7)",
-        "bikeBrandPlaceholder": "Brand",
-        "bikeModelPlaceholder": "Model",
         "bikeColorPlaceholder": "Color",
-        "bikeSerialPlaceholder": "Frame number",
         "count": "{count, plural, one {# ticket} other {# tickets}}"
     },
     "ticketStatus": {
@@ -153,10 +150,7 @@
         "deleteBike": "Delete bike",
         "bikeName": "Bike name",
         "bikeNamePlaceholder": "e.g. Trek Marlin 7",
-        "brand": "Brand",
-        "model": "Model",
         "color": "Color",
-        "serial": "Frame number",
         "tickets": "Tickets",
         "receipts": "Receipts",
         "noTickets": "No tickets yet.",

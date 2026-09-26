@@ -15,10 +15,7 @@ export async function resolveBike(entry: TicketBikeEntry, customerId: string) {
         data: {
             customerId,
             name,
-            brand: entry.newBike?.brand?.trim() || null,
-            model: entry.newBike?.model?.trim() || null,
             color: entry.newBike?.color?.trim() || null,
-            serial: entry.newBike?.serial?.trim() || null,
         },
     });
 }

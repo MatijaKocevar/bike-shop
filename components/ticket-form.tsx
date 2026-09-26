@@ -45,7 +45,7 @@ function createBikeTab(bike?: BikeOption): TicketBikeTab {
         key: crypto.randomUUID(),
         bikeId: bike?.id ?? null,
         bikeName: bike?.name ?? "",
-        newBike: { name: "", brand: "", model: "", color: "", serial: "" },
+        newBike: { name: "", color: "" },
         intakeNote: "",
         lines: [],
     };
@@ -90,7 +90,7 @@ function ticketTab(ticket: TicketDetail): TicketBikeTab {
         key: ticket.id,
         bikeId: ticket.bikeId,
         bikeName: ticket.bikeName ?? "",
-        newBike: { name: "", brand: "", model: "", color: "", serial: "" },
+        newBike: { name: "", color: "" },
         intakeNote: ticket.intakeNote ?? "",
         lines: ticket.items.map(toDraft),
     };
@@ -101,7 +101,7 @@ function reservationTab(reservation: ReservationDetail): TicketBikeTab {
         key: reservation.ticket?.id ?? crypto.randomUUID(),
         bikeId: reservation.bikeId,
         bikeName: reservation.bikeName ?? "",
-        newBike: { name: "", brand: "", model: "", color: "", serial: "" },
+        newBike: { name: "", color: "" },
         intakeNote: reservation.ticket?.intakeNote ?? "",
         lines: reservation.ticket ? reservation.ticket.items.map(toDraft) : [],
     };
@@ -254,10 +254,7 @@ export function TicketForm({
                 ? null
                 : {
                       name: tab.newBike.name.trim(),
-                      brand: tab.newBike.brand.trim(),
-                      model: tab.newBike.model.trim(),
                       color: tab.newBike.color.trim(),
-                      serial: tab.newBike.serial.trim(),
                   },
             intakeNote: tab.intakeNote,
             items: tab.lines,
@@ -495,32 +492,6 @@ export function TicketForm({
                                         />
                                         <input
                                             className={`${inputClass} w-full`}
-                                            value={active.newBike.brand}
-                                            placeholder={t("bikeBrandPlaceholder")}
-                                            onChange={(event) =>
-                                                updateActiveTab({
-                                                    newBike: {
-                                                        ...active.newBike,
-                                                        brand: event.target.value,
-                                                    },
-                                                })
-                                            }
-                                        />
-                                        <input
-                                            className={`${inputClass} w-full`}
-                                            value={active.newBike.model}
-                                            placeholder={t("bikeModelPlaceholder")}
-                                            onChange={(event) =>
-                                                updateActiveTab({
-                                                    newBike: {
-                                                        ...active.newBike,
-                                                        model: event.target.value,
-                                                    },
-                                                })
-                                            }
-                                        />
-                                        <input
-                                            className={`${inputClass} w-full`}
                                             value={active.newBike.color}
                                             placeholder={t("bikeColorPlaceholder")}
                                             onChange={(event) =>
@@ -528,19 +499,6 @@ export function TicketForm({
                                                     newBike: {
                                                         ...active.newBike,
                                                         color: event.target.value,
-                                                    },
-                                                })
-                                            }
-                                        />
-                                        <input
-                                            className={`${inputClass} w-full col-span-2`}
-                                            value={active.newBike.serial}
-                                            placeholder={t("bikeSerialPlaceholder")}
-                                            onChange={(event) =>
-                                                updateActiveTab({
-                                                    newBike: {
-                                                        ...active.newBike,
-                                                        serial: event.target.value,
                                                     },
                                                 })
                                             }
