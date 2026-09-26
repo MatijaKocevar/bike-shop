@@ -59,6 +59,7 @@ export default async function TicketsPage({ searchParams }: TicketsPageProps) {
                         cancelHref="/tickets"
                         createAction={createTicket}
                         updateAction={updateTicket}
+                        photos={<TicketImages />}
                     />
                 ) : null}
             </FormDialog>

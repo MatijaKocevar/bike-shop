@@ -7,6 +7,7 @@ import { db } from "@/lib/db";
 import { parseTicketEntries } from "@/lib/ticket-entries";
 import { parseTicketLines } from "@/lib/ticket-lines";
 import { resolveBike } from "../_utils/resolve-bike";
+import { parseTicketPhotoInputs } from "../_utils/parse-ticket-photo-inputs";
 
 async function resolveCustomer(formData: FormData) {
     const customerId = (formData.get("customerId") as string) || null;
@@ -60,6 +61,19 @@ export async function createTicket(formData: FormData) {
     }
 
     if (createdIds.length === 0) redirect("/tickets?new=1");
+
+    const photos = parseTicketPhotoInputs(formData.get("photos") as string | null);
+
+    if (photos.length > 0) {
+        await db.ticketImage.createMany({
+            data: photos.map((photo, index) => ({
+                ticketId: createdIds[0],
+                key: photo.key,
+                description: photo.description,
+                sortOrder: index,
+            })),
+        });
+    }
 
     revalidatePath("/tickets");
     revalidatePath("/customers");
