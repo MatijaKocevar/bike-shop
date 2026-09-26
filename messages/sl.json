@@ -128,6 +128,7 @@
         "bikeColorPlaceholder": "Barva",
         "photos": "Fotografije",
         "addPhoto": "Dodaj fotografijo",
+        "takePhoto": "Fotografiraj",
         "noPhotos": "Ni še fotografij. Fotografirajte ali priložite datoteko.",
         "photoDescription": "Opis",
         "removePhoto": "Odstrani fotografijo",
